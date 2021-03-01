@@ -1,4 +1,30 @@
 export const pools = [
+
+  {
+    id: 'test-harvest',
+    logo: 'single-assets/BIFI.png',
+    name: 'TEST-HARVEST LP',
+    token: 'TEST-HARVEST LP',
+    tokenDescription: 'Uses: Pancake',
+    tokenAddress: '0xdaF66c0B7e8E2FC76B15B07AD25eE58E04a66796',
+    tokenDecimals: 18,
+    tokenDescriptionUrl: '#',
+    earnedToken: 'TEST-HARVEST',
+    earnedTokenAddress: '0xD6dfb00B67914C3460165934ba763b9de5347677',
+    earnContractAddress: '0xD6dfb00B67914C3460165934ba763b9de5347677',
+    pricePerFullShare: 1,
+    tvl: 0,
+    oracle: 'pancake-lp',
+    oracleId: 'ttt',
+    oraclePrice: 0,
+    depositsPaused: false,
+    status: 'active',
+    platform: 'ttt',
+    assets: ['T', 'BNB'],
+    callFee: 0.5,
+  },
+
+
   {
     id: 'bifi-maxi',
     logo: 'single-assets/BIFI.png',
