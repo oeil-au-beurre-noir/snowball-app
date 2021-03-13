@@ -8,7 +8,7 @@ import styles from './styles';
 
 const useStyles = makeStyles(styles);
 
-const Faq = () => {
+const HomeBanner = () => {
   //const { t } = useTranslation();
   const classes = useStyles();
 
@@ -19,5 +19,5 @@ const Faq = () => {
   );
 };
 
-export default memo(Faq);
+export default memo(HomeBanner);
 
