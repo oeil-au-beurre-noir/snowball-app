@@ -30,34 +30,30 @@ const Header = ({ links, isNightMode, setNightMode }) => {
       <Toolbar className={classes.container}>
         <Button href="/" className={classes.title}>
           <Hidden xsDown>
+            {/* need to fix the logo to became white in darkmode */}
             <img
-              alt="BIFI"
-              src={require(`images/single-assets/BIFI.svg`)}
+              alt="SNOB"
+              src={require(`images/single-assets/snowball_logo.svg`)}
               height={'40px'}
               className={classes.logo}
             />
-            beefy.finance
           </Hidden>
           <Hidden smUp>
             <img
-              alt="BIFI"
-              src={require(`images/single-assets/BIFI.svg`)}
+              alt="SNOB"
+              src={require(`images/single-assets/snowball.svg`)}
               height={'35px'}
               className={classes.logo}
             />
           </Hidden>
         </Button>
 
-        <span>
-          <Hidden mdDown>
-            {renderLink('barn', 'barn', 'warehouse', classes)}
-            {renderLink('vote', 'vote', 'vote-yea', classes)}
-            {renderLink('dashboard', t('stats'), 'chart-bar', classes)}
-            {renderLink('docs', 'docs', 'book', classes)}
-          </Hidden>
-          {renderLink('buy', t('buy'), 'dollar-sign', classes)}
-          {renderBoost(classes)}
-        </span>
+        <Hidden mdDown>
+          {renderLink('', 'Home', classes)}
+          {renderLink('snowglobe', 'SnowGlobe', classes)}
+          {renderLink('icequeen', 'IceQueen', classes)}
+          {renderLink('instructions', 'Instructions', classes)}
+        </Hidden>
 
         <Hidden smDown implementation="css">
           <div className={classes.collapse}>{links}</div>
@@ -91,13 +87,13 @@ const Header = ({ links, isNightMode, setNightMode }) => {
           >
             <Close />
           </IconButton>
+
           <div className={classes.appResponsive}>{links}</div>
           <div style={{ textAlign: 'center' }}>
-            {renderLinkSidebar('barn', 'barn', 'warehouse', classes)}
-            {renderLinkSidebar('vote', 'vote', 'vote-yea', classes)}
-            {renderLinkSidebar('dashboard', t('stats'), 'chart-bar', classes)}
-            {renderLinkSidebar('docs', 'docs', 'book', classes)}
-            {renderLinkSidebar('buy', t('buy'), 'dollar-sign', classes)}
+            {renderLinkSidebar('', 'Home', classes)}
+            {renderLinkSidebar('snowglobe', 'SnowGlobe', classes)}
+            {renderLinkSidebar('icequeen', 'IceQueen', classes)}
+            {renderLinkSidebar('instructions', 'Instructions', classes)}
             <IconButton onClick={setNightMode} className={classes.icon}>
               {isNightMode ? <WbSunny /> : <NightsStay />}
             </IconButton>
@@ -108,41 +104,24 @@ const Header = ({ links, isNightMode, setNightMode }) => {
   );
 };
 
-const renderLink = (name, label, icon, classes) => {
+const renderLink = (name, label, classes) => {
   return (
-    <a
-      href={getLinkUrl(name)}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={classes.link}
-      style={{ marginLeft: '5px', marginRight: '5px' }}
-    >
-      <i className={`fas fa-${icon} ${classes.icon}`} />
-      <span>{label}</span>
+    <a className={classes.btnBoost} href={`/${name}`}>
+      {label}
     </a>
   );
 };
 
-const renderBoost = classes => {
+const renderLinkSidebar = (name, label, classes) => {
   return (
-    <a className={classes.btnBoost} href="/stake">
-      <img alt="Boost" src={require('../../images/stake/boost.svg')} />
-    </a>
-  );
-};
-
-const renderLinkSidebar = (name, label, icon, classes) => {
-  return (
-    <div style={{ width: '100%', paddingTop: '10px' }}>
-      {renderLink(name, label, icon, classes)}
-    </div>
+    <div style={{ width: '100%', paddingTop: '10px' }}>{renderLink(name, label, classes)}</div>
   );
 };
 
 const getLinkUrl = name => {
   return name === 'buy'
     ? 'https://1inch.exchange/#/r/0xF4cb25a1FF50E319c267b3E51CBeC2699FB2A43B/WBNB/BIFI'
-    : `https://${name}.beefy.finance`;
+    : `https://${name}.snowball.finance`;
 };
 
 export default Header;

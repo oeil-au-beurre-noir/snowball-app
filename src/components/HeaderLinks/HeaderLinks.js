@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import Avatar from '@material-ui/core/Avatar';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import { WbSunny, NightsStay } from '@material-ui/icons';
+import { WbSunny, Brightness2 } from '@material-ui/icons';
 import CustomDropdown from 'components/CustomDropdown/CustomDropdown.js';
 import Button from 'components/CustomButtons/Button.js';
 import { useTranslation } from 'react-i18next';
@@ -95,52 +95,45 @@ const HeaderLinks = ({
   };
 
   return (
-    <List className={classes.list + ' ' + classes.mlAuto}>
-      <Hidden smDown>
-        <ListItem className={classes.listItem}>
-          <IconButton onClick={setNightMode} className={classes.iconButton}>
-            {isNightMode ? <WbSunny /> : <NightsStay />}
-          </IconButton>
-        </ListItem>
-      </Hidden>
-      <ListItem className={classes.listItem}>
-        <CustomDropdown
-          navDropdown
-          hoverColor="dark"
-          buttonText={lng}
-          buttonProps={{
-            className: classes.navLink,
-            color: 'transparent',
-          }}
-          onClick={handleClick}
-          dropdownList={[
-            'Deutsch',
-            'English',
-            'Español',
-            'Français',
-            'हिन्दी',
-            'Bahasa Indonesia',
-            'Italiano',
-            '한글',
-            'Português',
-            'Pусский',
-            'Svenska',
-            'Türkçe',
-            'Українська',
-            '中文',
-            // TODO: more translations
-            { divider: true },
-            <a
-              href="https://github.com/beefyfinance/beefy-app/tree/master/src/locales"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={classes.cta}
-            >
-              Help to translate
-            </a>,
-          ]}
-        />
-      </ListItem>
+    <List className={classes.list + ' ' + classes.mlAuto + ' ' + classes.ulWallet}>
+      {/*<ListItem className={classes.listItem}>*/}
+      {/*  <CustomDropdown*/}
+      {/*    navDropdown*/}
+      {/*    hoverColor="dark"*/}
+      {/*    buttonText={lng}*/}
+      {/*    buttonProps={{*/}
+      {/*      className: classes.navLink,*/}
+      {/*      color: 'transparent',*/}
+      {/*    }}*/}
+      {/*    onClick={handleClick}*/}
+      {/*    dropdownList={[*/}
+      {/*      'Deutsch',*/}
+      {/*      'English',*/}
+      {/*      'Español',*/}
+      {/*      'Français',*/}
+      {/*      'हिन्दी',*/}
+      {/*      'Bahasa Indonesia',*/}
+      {/*      'Italiano',*/}
+      {/*      '한글',*/}
+      {/*      'Português',*/}
+      {/*      'Pусский',*/}
+      {/*      'Svenska',*/}
+      {/*      'Türkçe',*/}
+      {/*      'Українська',*/}
+      {/*      '中文',*/}
+      {/*      // TODO: more translations*/}
+      {/*      { divider: true },*/}
+      {/*      <a*/}
+      {/*        href="https://github.com/beefyfinance/beefy-app/tree/master/src/locales"*/}
+      {/*        target="_blank"*/}
+      {/*        rel="noopener noreferrer"*/}
+      {/*        className={classes.cta}*/}
+      {/*      >*/}
+      {/*        Help to translate*/}
+      {/*      </a>,*/}
+      {/*    ]}*/}
+      {/*  />*/}
+      {/*</ListItem>*/}
       <ListItem className={classes.listItem}>
         <Button
           disableElevation
@@ -162,13 +155,17 @@ const HeaderLinks = ({
               {shortAddress}
             </>
           ) : (
-            <>
-              <i className={classes.icon + ' far fa-question-circle'} />
-              {t('Vault-Wallet')}
-            </>
+            <span style={{ color: 'white' }}>{t('Vault-Wallet')}</span>
           )}
         </Button>
       </ListItem>
+      <Hidden smDown>
+        <ListItem className={classes.listItem}>
+          <IconButton onClick={setNightMode} className={classes.iconButton}>
+            {isNightMode ? <WbSunny /> : <Brightness2 />}
+          </IconButton>
+        </ListItem>
+      </Hidden>
     </List>
   );
 };
