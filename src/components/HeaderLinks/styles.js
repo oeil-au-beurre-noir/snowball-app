@@ -215,13 +215,19 @@ const styles = theme => ({
   },
   walletDisplay: {
     width: '100%',
-    margin: '12px 0',
+    borderRadius: '8px',
     fontSize: '14px',
+    padding: '10px',
     fontWeight: 'bold',
-    backgroundColor: theme.palette.background.secondary,
-    color: '#fff',
+    backgroundColor: '#33A9FF',
+    color: 'white',
+    marginTop: '65px',
+    '@media (min-width: 992px)': {
+      margin: '12px 0',
+    },
     '&:hover': {
-      backgroundColor: theme.palette.background.border,
+      backgroundColor: '#33A9FF',
+      opacity: '0.7',
     },
     [theme.breakpoints.up('md')]: {
       width: '180px',
@@ -234,6 +240,7 @@ const styles = theme => ({
   },
   iconButton: {
     color: theme.palette.text.primary,
+    marginLeft: '0.5rem',
   },
 });
 
