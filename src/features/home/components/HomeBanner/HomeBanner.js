@@ -18,8 +18,18 @@ const HomeBanner = () => {
 
   return (
     <Grid container item className={classes.root} justify="center">
-      <TotalValueLocked/>
-      <TotalSupply/>
+      <Grid item xs={12}>
+        <Grid container justify="center" spacing={2}>
+          <Grid  item>
+            <TotalValueLocked/>
+          </Grid>
+          <Grid  item>
+              <TotalSupply/>
+          </Grid>
+        </Grid>
+      </Grid>
+
+
       <Button
         className={`${classes.showDetailButton} ${classes.showDetailButtonContained}`}
         href="/snowglobes"
