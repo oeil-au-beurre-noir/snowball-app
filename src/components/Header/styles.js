@@ -17,9 +17,9 @@ import {
 const styles = theme => ({
   appBar: {
     display: 'flex',
+    height: '70px',
     border: '0',
     borderRadius: '3px',
-    padding: '0.625rem 0',
     marginBottom: '20px',
     color: grayColor[15],
     width: '100%',
@@ -46,6 +46,8 @@ const styles = theme => ({
   container: {
     ...container,
     minHeight: '50px',
+    marginLeft: 0,
+    marginRight: 0,
     alignItems: 'center',
     justifyContent: 'space-between',
     display: 'flex',
@@ -198,6 +200,7 @@ const styles = theme => ({
       display: 'flex !important',
       MsFlexPreferredSize: 'auto',
       flexBasis: 'auto',
+      flexDirect: 'flex-end',
     },
     WebkitBoxFlex: '1',
     MsFlexPositive: '1',
@@ -246,19 +249,30 @@ const styles = theme => ({
   btnBoost: {
     marginLeft: '10px',
     marginRight: '5px',
-    padding: '3px 4px',
-    border: 'solid 2px #5a8f69',
-    borderRadius: '4px',
+    fontFamily: 'Montserrat',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontSize: '18px',
+    color: theme.palette.text.primary,
+    lineHeight: '18px',
+    '@media (min-width: 992px)': {
+      height: '70px',
+      padding: '27px 4px',
+    },
+    '&:hover': {
+      color: theme.palette.text.primary,
+      borderBottom: '4px solid #33A9FF',
+    },
+    textAlign: 'center',
     '& img': {
       verticalAlign: 'middle',
       height: '15px',
     },
-    '&:hover': {
-      backgroundColor: '#5a8f69',
-    },
+
     '&:hover img': {
-      filter: 'invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(1000%) contrast(1000%)',
-    }
+      filter:
+        'invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(1000%) contrast(1000%)',
+    },
   },
 });
 
