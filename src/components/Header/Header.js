@@ -31,17 +31,17 @@ const Header = ({ links, isNightMode, setNightMode }) => {
         <Button href="/" className={classes.title}>
           <Hidden xsDown>
             <img
-              alt="BIFI"
-              src={require(`images/single-assets/BIFI.svg`)}
+              alt="SNOB"
+              src={require(`images/single-assets/snowball.svg`)}
               height={'40px'}
               className={classes.logo}
             />
-            beefy.finance
+           Snowball Finance
           </Hidden>
           <Hidden smUp>
             <img
-              alt="BIFI"
-              src={require(`images/single-assets/BIFI.svg`)}
+              alt="SNOB"
+              src={require(`images/single-assets/snowball.svg`)}
               height={'35px'}
               className={classes.logo}
             />
@@ -49,14 +49,17 @@ const Header = ({ links, isNightMode, setNightMode }) => {
         </Button>
 
         <span>
-          <Hidden mdDown>
-            {renderLink('barn', 'barn', 'warehouse', classes)}
-            {renderLink('vote', 'vote', 'vote-yea', classes)}
-            {renderLink('dashboard', t('stats'), 'chart-bar', classes)}
-            {renderLink('docs', 'docs', 'book', classes)}
-          </Hidden>
-          {renderLink('buy', t('buy'), 'dollar-sign', classes)}
-          {renderBoost(classes)}
+          {/*<Hidden mdDown>*/}
+          {/*  /!*{renderLink('barn', 'barn', 'warehouse', classes)}*!/*/}
+          {/*  {renderLink('vote', 'vote', 'vote-yea', classes)}*/}
+          {/*  {renderLink('dashboard', t('stats'), 'chart-bar', classes)}*/}
+          {/*  {renderLink('docs', 'docs', 'book', classes)}*/}
+          {/*</Hidden>*/}
+          {/*{renderLink('buy', t('buy'), 'dollar-sign', classes)}*/}
+          {renderSnowGlobes(classes)}
+          {renderIceQueen(classes)}
+          {renderInstructions(classes)}
+
         </span>
 
         <Hidden smDown implementation="css">
@@ -93,11 +96,14 @@ const Header = ({ links, isNightMode, setNightMode }) => {
           </IconButton>
           <div className={classes.appResponsive}>{links}</div>
           <div style={{ textAlign: 'center' }}>
-            {renderLinkSidebar('barn', 'barn', 'warehouse', classes)}
-            {renderLinkSidebar('vote', 'vote', 'vote-yea', classes)}
-            {renderLinkSidebar('dashboard', t('stats'), 'chart-bar', classes)}
-            {renderLinkSidebar('docs', 'docs', 'book', classes)}
-            {renderLinkSidebar('buy', t('buy'), 'dollar-sign', classes)}
+            {/*{renderLinkSidebar('barn', 'barn', 'warehouse', classes)}*/}
+            {/*{renderLinkSidebar('vote', 'vote', 'vote-yea', classes)}*/}
+            {/*{renderLinkSidebar('dashboard', t('stats'), 'chart-bar', classes)}*/}
+            {/*{renderLinkSidebar('docs', 'docs', 'book', classes)}*/}
+            {/*{renderLinkSidebar('buy', t('buy'), 'dollar-sign', classes)}*/}
+            {renderSnowGlobes(classes)}
+            {renderIceQueen(classes)}
+            {renderInstructions(classes)}
             <IconButton onClick={setNightMode} className={classes.icon}>
               {isNightMode ? <WbSunny /> : <NightsStay />}
             </IconButton>
@@ -123,13 +129,32 @@ const renderLink = (name, label, icon, classes) => {
   );
 };
 
-const renderBoost = classes => {
+const renderIceQueen = classes => {
   return (
     <a className={classes.btnBoost} href="/stake">
-      <img alt="Boost" src={require('../../images/stake/boost.svg')} />
+      <img alt="Boost" src={require('../../images/stake/icequeen.svg')} />
+      IceQueen
     </a>
   );
 };
+
+const renderSnowGlobes = classes => {
+  return (
+    <a className={classes.btnBoost} href="/snowglobes">
+      <img alt="Snowglobes" src={require('../../images/snowglobes/snowglobe.svg')} />
+      Snowglobes
+    </a>
+  );
+};
+const renderInstructions = classes => {
+  return (
+    <a className={classes.btnBoost} href="https://snowballs.gitbook.io/snowball-finance-docs/">
+      <img alt="Instructions" src={require('../../images/book.svg')} />
+      Instructions
+    </a>
+  );
+};
+
 
 const renderLinkSidebar = (name, label, icon, classes) => {
   return (
@@ -142,7 +167,7 @@ const renderLinkSidebar = (name, label, icon, classes) => {
 const getLinkUrl = name => {
   return name === 'buy'
     ? 'https://1inch.exchange/#/r/0xF4cb25a1FF50E319c267b3E51CBeC2699FB2A43B/WBNB/BIFI'
-    : `https://${name}.beefy.finance`;
+    : `https://${name}.snowball.finance`;
 };
 
 export default Header;
