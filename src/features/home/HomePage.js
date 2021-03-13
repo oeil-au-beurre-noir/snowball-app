@@ -1,13 +1,12 @@
 import React from 'react';
-
-import Pools from 'features/vault/components/Pools/Pools';
-import Disclaimer from '../../components/Disclaimer/Disclaimer';
+import Faq from '../../components/Faq/Faq';
+import HomeBanner from '../../components/HomeBanner/HomeBanner';
 
 export default function HomePage() {
   return (
     <>
-      <Disclaimer />
-      <Pools fromPage="home" />
+      <HomeBanner />
+      <Faq />
     </>
   );
 }
