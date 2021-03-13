@@ -103,44 +103,44 @@ const HeaderLinks = ({
           </IconButton>
         </ListItem>
       </Hidden>
-      <ListItem className={classes.listItem}>
-        <CustomDropdown
-          navDropdown
-          hoverColor="dark"
-          buttonText={lng}
-          buttonProps={{
-            className: classes.navLink,
-            color: 'transparent',
-          }}
-          onClick={handleClick}
-          dropdownList={[
-            'Deutsch',
-            'English',
-            'Español',
-            'Français',
-            'हिन्दी',
-            'Bahasa Indonesia',
-            'Italiano',
-            '한글',
-            'Português',
-            'Pусский',
-            'Svenska',
-            'Türkçe',
-            'Українська',
-            '中文',
-            // TODO: more translations
-            { divider: true },
-            <a
-              href="https://github.com/beefyfinance/beefy-app/tree/master/src/locales"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={classes.cta}
-            >
-              Help to translate
-            </a>,
-          ]}
-        />
-      </ListItem>
+      {/*<ListItem className={classes.listItem}>*/}
+      {/*  <CustomDropdown*/}
+      {/*    navDropdown*/}
+      {/*    hoverColor="dark"*/}
+      {/*    buttonText={lng}*/}
+      {/*    buttonProps={{*/}
+      {/*      className: classes.navLink,*/}
+      {/*      color: 'transparent',*/}
+      {/*    }}*/}
+      {/*    onClick={handleClick}*/}
+      {/*    dropdownList={[*/}
+      {/*      'Deutsch',*/}
+      {/*      'English',*/}
+      {/*      'Español',*/}
+      {/*      'Français',*/}
+      {/*      'हिन्दी',*/}
+      {/*      'Bahasa Indonesia',*/}
+      {/*      'Italiano',*/}
+      {/*      '한글',*/}
+      {/*      'Português',*/}
+      {/*      'Pусский',*/}
+      {/*      'Svenska',*/}
+      {/*      'Türkçe',*/}
+      {/*      'Українська',*/}
+      {/*      '中文',*/}
+      {/*      // TODO: more translations*/}
+      {/*      { divider: true },*/}
+      {/*      <a*/}
+      {/*        href="https://github.com/beefyfinance/beefy-app/tree/master/src/locales"*/}
+      {/*        target="_blank"*/}
+      {/*        rel="noopener noreferrer"*/}
+      {/*        className={classes.cta}*/}
+      {/*      >*/}
+      {/*        Help to translate*/}
+      {/*      </a>,*/}
+      {/*    ]}*/}
+      {/*  />*/}
+      {/*</ListItem>*/}
       <ListItem className={classes.listItem}>
         <Button
           disableElevation
