@@ -1,10 +1,9 @@
-import { StakePage, PoolPage } from './';
-import SnowglobesPage from './SnowglobesPage';
+import { SnowglobesPage } from './';
 
 export default {
-  path: 'stake',
+  path: 'snowglobes',
   childRoutes: [
     { path: 'snowglobes', component: SnowglobesPage, isIndex: true },
-    { path: 'pool/:index', component: PoolPage },
+    // { path: 'pool/:index', component: PoolPage },
   ],
 };

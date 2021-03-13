@@ -50,7 +50,7 @@ const Header = ({ links, isNightMode, setNightMode }) => {
 
         <Hidden mdDown>
           {renderLink('', 'Home', classes)}
-          {renderLink('snowglobe', 'SnowGlobe', classes)}
+          {renderLink('snowglobes', 'SnowGlobe', classes)}
           {renderLink('icequeen', 'IceQueen', classes)}
           {renderLink('instructions', 'Instructions', classes)}
         </Hidden>
@@ -91,7 +91,7 @@ const Header = ({ links, isNightMode, setNightMode }) => {
           <div className={classes.appResponsive}>{links}</div>
           <div style={{ textAlign: 'center' }}>
             {renderLinkSidebar('', 'Home', classes)}
-            {renderLinkSidebar('snowglobe', 'SnowGlobe', classes)}
+            {renderLinkSidebar('snowglobes', 'SnowGlobe', classes)}
             {renderLinkSidebar('icequeen', 'IceQueen', classes)}
             {renderLinkSidebar('instructions', 'Instructions', classes)}
             <IconButton onClick={setNightMode} className={classes.icon}>
