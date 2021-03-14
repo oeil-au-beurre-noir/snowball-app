@@ -1,12 +1,12 @@
 import React from 'react';
-import {StakePools} from './sections'
 import {Title} from './sections'
+import Pools from 'features/vault/components/Pools/Pools';
 
 export default function IcequeenPage() {
   return (
     <>
     <Title />
-    <StakePools />
+    <Pools />
     </>
   );
 }
