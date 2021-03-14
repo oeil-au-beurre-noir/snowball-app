@@ -21,10 +21,10 @@ export const staking = [
     status: 'active',
     hideCountdown: true,
     partner: {
-      logo: 'stake/beefy/beefyfinance.png',
-      background: 'stake/beefy/background.png',
+      logo: 'icequeen/beefy/beefyfinance.png',
+      background: 'icequeen/beefy/background.png',
       text:
-        "You probably already knew that Beefy is the most trusted Yield optimizer for the Binance Smart Chain. But did you know that Beefy has it’s on token? $BIFI has a maximum supply of 80000 tokens and there is no way to mint more. Everyone who holds one or more of these $BIFI can not only do cool stuff like create and vote on proposals, they also get a share of all harvests done, every hour, every day on all our +120 vaults. That's a lot of BNB that goes straight to our $BIFI holders. All you have to do is stake your $BIFI in this vault, it’s that simple, come back and harvest your BNB whenever you need it! (You can still vote on proposals even though you have staked your $BIFI here).",
+        "You probably already knew that Beefy is the most trusted Yield optimizer for the Binance Smart Chain. But did you know that Beefy has it’s on token? $BIFI has a maximum supply of 80000 tokens and there is no way to mint more. Everyone who holds one or more of these $BIFI can not only do cool stuff like create and vote on proposals, they also get a share of all harvests done, every hour, every day on all our +120 vaults. That's a lot of BNB that goes straight to our $BIFI holders. All you have to do is icequeen your $BIFI in this vault, it’s that simple, come back and harvest your BNB whenever you need it! (You can still vote on proposals even though you have staked your $BIFI here).",
       website: 'https://app.beefy.finance',
       social: {
         telegram: 'http://t.me/beefyfinance',
@@ -52,8 +52,8 @@ export const staking = [
     status: 'closed',
     isMooStaked: true,
     partner: {
-      logo: 'stake/cafeswap/cafeswap.png',
-      background: 'stake/cafeswap/background.png',
+      logo: 'icequeen/cafeswap/cafeswap.png',
+      background: 'icequeen/cafeswap/background.png',
       text:
         'CafeSwap is a yield farming and staking platform on BSC Chain, We have chosen BSC because of its low tnx fees and faster speed. We have built this project to provide the best experience with farming while regulating the supply, we believe in partnerships hence we aim to bring all BSC DeFi ecosystems in one place to have a friendly ecosystem for all of us.',
       website: 'https://cafeswap.finance',
@@ -83,8 +83,8 @@ export const staking = [
     status: 'closed',
     isMooStaked: true,
     partner: {
-      logo: 'stake/ramenswap/ramenswap.png',
-      background: 'stake/ramenswap/background.png',
+      logo: 'icequeen/ramenswap/ramenswap.png',
+      background: 'icequeen/ramenswap/background.png',
       text:
         'The Most Delicious Yield Farm AMM on Binance Smart Chain. RamenSwap Finance is a community driven Yield Farming, DeFi Aggregator and DEX Aggregator on Binance Smart Chain. You can earn RAMEN by staking it on the pool and farming it by providing the liquidity to earn more delicious RAMEN. You can also maximize your return by compounding your token in the vault and connecting several DEX to find the most efficient swapping routes across all platforms that will be released in Q2 to support BSC space.\n',
       website: 'https://ramenswap.finance/',
@@ -114,8 +114,8 @@ export const staking = [
     status: 'closed',
     isMooStaked: true,
     partner: {
-      logo: 'stake/saltswap/saltswap.png',
-      background: 'stake/saltswap/background.png',
+      logo: 'icequeen/saltswap/saltswap.png',
+      background: 'icequeen/saltswap/background.png',
       text:
         'We are a team of experienced software developers and product managers from top tier tech companies (aka the salts) that want to contribute to the BSC DeFi yield farm movement and take it to the next level. Even though we are starting off with a salty yield farm, we will quickly move on to bigger and greater things. We have big plans for the SALT token.\n',
       website: 'https://saltswap.finance/',
@@ -145,8 +145,8 @@ export const staking = [
     status: 'closed',
     isMooStaked: true,
     partner: {
-      logo: 'stake/crowfinance/crowfinance.png',
-      background: 'stake/crowfinance/background.png',
+      logo: 'icequeen/crowfinance/crowfinance.png',
+      background: 'icequeen/crowfinance/background.png',
       text:
         'CrowFinance an Evolution Yield Farming on Binance Smart Chain with daytime and nighttime burn mechanism system fork from fry and add some function from thug + jetfuel',
       website: 'https://www.crowfinance.net/',
@@ -176,8 +176,8 @@ export const staking = [
     status: 'active',
     isMooStaked: true,
     partner: {
-      logo: 'stake/apeswap/logo.png',
-      background: 'stake/apeswap/background.png',
+      logo: 'icequeen/apeswap/logo.png',
+      background: 'icequeen/apeswap/background.png',
       text:
         'ApeSwap is an Automated Market Maker, Yield Farming, and Staking platform on Binance Smart Chain (forked from PancakeSwap). ApeSwap was built by DeFi Apes, for DeFi Apes. We have a dedicated team of experienced monkeys, who have been in the crypto space for years. $BANANA is the native currency of our platform. Stake, pool, and earn $BANANA all on ApeSwap.',
       website: 'https://apeswap.finance/',
@@ -207,8 +207,8 @@ export const staking = [
     status: 'active',
     isMooStaked: true,
     partner: {
-      logo: 'stake/soup/logo.png',
-      background: 'stake/soup/background.png',
+      logo: 'icequeen/soup/logo.png',
+      background: 'icequeen/soup/background.png',
       text:
         "Soup Protocol is an experimental project that enables the generation of SOUP tokens that runs on Binance Smart Chain. Inspired by the likes of Basis Cash & bDollar, SOUP is an algorithmic token that is designed to pegged its value to the Binance (BNB) token instead of a stablecoin. The protocol is designed to expand and contract the supply of SOUP tokens similar to the way central banks trade fiscal debt to stabilise purchasing power, without any rebases or collateral risk. The SOUP token can be used to buy and sell tokens on Pancake Swap and also can be used to interact with Soup Protocol's upcoming games such as Soup3D.",
       website: 'https://soups.finance/',

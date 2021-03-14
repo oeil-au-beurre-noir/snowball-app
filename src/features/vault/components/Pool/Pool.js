@@ -8,6 +8,7 @@ import BigNumber from 'bignumber.js';
 import { byDecimals } from 'features/helpers/bignumber';
 import PoolSummary from '../PoolSummary/PoolSummary';
 import PoolDetails from '../PoolDetails/PoolDetails';
+import Stake from '../Stake/Stake';
 import styles from './styles';
 
 const useStyles = makeStyles(styles);
@@ -21,6 +22,7 @@ const Pool = ({
   fetchBalancesDone,
   fetchApysDone,
   fetchVaultsDataDone,
+  fromPage
 }) => {
   const classes = useStyles();
 
@@ -60,12 +62,20 @@ const Pool = ({
           fetchVaultsDataDone={fetchVaultsDataDone}
         />
         <Divider variant="middle" className={classes.divider} />
+        {fromPage == 'snowglobes' &&
         <PoolDetails
           pool={pool}
           balanceSingle={balanceSingle}
           sharesBalance={sharesBalance}
           index={index}
         />
+        }
+        {fromPage == 'icequeen' &&
+        <Stake
+          fromPage={fromPage}
+        />
+        }
+
       </Accordion>
     </Grid>
   );

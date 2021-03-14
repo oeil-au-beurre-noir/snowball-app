@@ -4,7 +4,7 @@ export const pools = [
     logo: 'avax-pairs/SNOB-AVAX.svg',
     name: 'SNOB-AVAX LP',
     token: 'SNOB-AVAX LP',
-    tokenDescription: 'Uses: Pangolin (Auto)',
+    tokenDescription: 'Uses: Pangolin',
     tokenAddress: '0xc38f41a296a4493ff429f1238e030924a1542e50',
     tokenDecimals: 18,
     tokenDescriptionUrl: '#',
@@ -21,6 +21,8 @@ export const pools = [
     platform: 'Autofarm',
     assets: ['SNOB', 'AVAX'],
     callFee: 0.5,
+    lockForSnob: true,
+    lockRate: 0.5
   },
     {
     id: 'auto-png-avax',
@@ -44,6 +46,9 @@ export const pools = [
     platform: 'Autofarm',
     assets: ['PNG', 'AVAX'],
     callFee: 0.5,
+      lockForSnob: true,
+      lockRate: 0.25
+
   },
   {
     id: 'auto-eth-avax',
@@ -67,6 +72,8 @@ export const pools = [
     platform: 'Autofarm',
     assets: ['ETH', 'AVAX'],
     callFee: 0.5,
+    lockForSnob: true,
+    lockRate: 0.125
   },
 
   {
@@ -91,6 +98,8 @@ export const pools = [
     platform: 'Autofarm',
     assets: ['SUSHI', 'AVAX'],
     callFee: 0.5,
+    lockForSnob: true,
+    lockRate: 0.125
   }
   /* keep a few in comment for the example
   {

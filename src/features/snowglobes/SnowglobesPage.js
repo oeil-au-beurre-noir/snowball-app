@@ -9,7 +9,7 @@ export default function SnowglobesPage() {
       <Disclaimer />
       <div>SNOWGLOBES</div>
       <div>A quick description of what snowglobes are</div>
-      <Pools fromPage="home"/>
+      <Pools fromPage="snowglobes"/>
     </>
   );
 }
