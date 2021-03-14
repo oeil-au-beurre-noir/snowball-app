@@ -1,2 +1,1 @@
-export { default as SnowglobePage } from './SnowglobesPage';
-export { default as PoolPage } from './PoolPage';
+export { default as SnowglobesPage } from './SnowglobesPage';
