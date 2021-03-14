@@ -37,7 +37,7 @@ const PoolTitle = ({ name, logo, description, url, launchpool }) => {
                     {description}
                 </Typography>
                 {launchpool ? (
-                    <a className={classes.btnBoost} href={'/stake/pool/' + launchpool.poolIndex} >
+                    <a className={classes.btnBoost} href={'/icequeen/pool/' + launchpool.poolIndex} >
                         <img alt='Boost' src={require('../../../../../images/stake/boost.svg')} height={15} />
                         <span><img alt='Fire' src={require('../../../../../images/stake/fire.png')} height={30} /></span>
                     </a>

@@ -10,7 +10,7 @@ import VisiblePools from '../VisiblePools/VisiblePools';
 import styles from './styles';
 import usePoolsTvl from '../../hooks/usePoolsTvl';
 import { formatGlobalTvl } from 'features/helpers/format';
-import {useFetchPoolsInfo} from "../../../stake/redux/fetchPoolsInfo";
+import {useFetchPoolsInfo} from "../../../icequeen/redux/fetchPoolsInfo";
 
 const FETCH_INTERVAL_MS = 30 * 1000;
 
