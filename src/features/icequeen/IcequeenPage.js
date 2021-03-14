@@ -6,7 +6,7 @@ export default function IcequeenPage() {
   return (
     <>
     <Title />
-    <Pools />
+    <Pools fromPage="icequeen"/>
     </>
   );
 }
