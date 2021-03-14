@@ -6,11 +6,9 @@ import {
   Typography,
   Avatar,
   makeStyles,
-  Box,
-  Accordion,
-  AccordionDetails,
+  Box
 } from '@material-ui/core';
-import Disclaimer from '../../../components/Disclaimer/Disclaimer';
+
 import Button from '../../../components/CustomButtons/Button';
 import styles from './styles/list';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -91,11 +89,7 @@ export default function StakePools(props) {
 
   return (
     <Grid container>
-      <Grid item xs={12}>
-        <div className={classes.launchpool}>
-          <img alt="Launchpool" src={require('../../../images/stake/launchpool.png')} />
-        </div>
-      </Grid>
+
       <Grid container spacing={4} justify={'center'}>
         {pools.map((pool, index) => (
           <Grid xs={12} sm={6} md={6} lg={3} key={index} item>

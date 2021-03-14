@@ -1,6 +1,12 @@
 import React from 'react';
 import {StakePools} from './sections'
+import {Title} from './sections'
 
 export default function IcequeenPage() {
-  return <StakePools />;
+  return (
+    <>
+    <Title />
+    <StakePools />
+    </>
+  );
 }
