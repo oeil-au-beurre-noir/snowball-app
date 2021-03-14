@@ -16,7 +16,7 @@ const FETCH_INTERVAL_MS = 30 * 1000;
 
 const useStyles = makeStyles(styles);
 
-export default function Pools() {
+export default function Pools({ fromPage }) {
   const { t } = useTranslation();
   const { web3, address } = useConnectWallet();
   const { pools, fetchVaultsData, fetchVaultsDataDone } = useFetchVaultsData();
@@ -75,6 +75,7 @@ export default function Pools() {
         fetchBalancesDone={fetchBalancesDone}
         fetchApysDone={fetchApysDone}
         fetchVaultsDataDone={fetchVaultsDataDone}
+        fromPage={fromPage}
       />
     </Grid>
   );

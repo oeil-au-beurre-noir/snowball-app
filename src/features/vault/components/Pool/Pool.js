@@ -21,6 +21,7 @@ const Pool = ({
   fetchBalancesDone,
   fetchApysDone,
   fetchVaultsDataDone,
+  fromPage
 }) => {
   const classes = useStyles();
 

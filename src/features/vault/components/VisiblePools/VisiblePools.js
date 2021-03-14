@@ -25,6 +25,7 @@ const VisiblePools = ({
   fetchBalancesDone,
   fetchApysDone,
   fetchVaultsDataDone,
+  fromPage
 }) => {
   const classes = useStyles();
   const { t } = useTranslation();
@@ -63,6 +64,7 @@ const VisiblePools = ({
               fetchBalancesDone={fetchBalancesDone}
               fetchApysDone={fetchApysDone}
               fetchVaultsDataDone={fetchVaultsDataDone}
+              fromPage={fromPage}
             />
           ))}
         </InfiniteScroll>
