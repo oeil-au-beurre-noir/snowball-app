@@ -29,13 +29,13 @@ const hexToRgb = input => {
 // // // Variables - Styles that are used on more than one component
 // #############################
 
-const primaryColor = ['#000000', '#B9AEA5'];
+const primaryColor = ['#ebf6ff', '#33a9ff'];
 const hoverColor = ['#EFE6DC'];
 
 const secondaryColor = ['#FBF6F0', '#EFE6DC', '#DED9D5'];
-const warningColor = ['#ff9800'];
-const dangerColor = ['#f44336'];
-const successColor = ['#78B288', '#5A8F69'];
+const warningColor = ['#ffaa5f'];
+const dangerColor = ['#f35757'];
+const successColor = ['#36da78', '#5A8F69'];
 const infoColor = ['#00acc1'];
 const roseColor = ['#e91e63'];
 const grayColor = [
@@ -66,8 +66,9 @@ const grayColor = [
   '#505050',
   '#1f1f1f',
 ];
-const whiteColor = '#FFF';
+const whiteColor = '#ffffff';
 const blackColor = '#000';
+const darkBlue = '#162a46';
 const twitterColor = '#55acee';
 const facebookColor = '#3b5998';
 const googleColor = '#dd4b39';
@@ -170,6 +171,7 @@ export {
   warningColor,
   dangerColor,
   successColor,
+  darkBlue,
   infoColor,
   roseColor,
   grayColor,
