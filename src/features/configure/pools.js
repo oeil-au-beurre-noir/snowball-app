@@ -1,6 +1,6 @@
 export const pools = [
   {
-    id: 'auto-snob-avax',
+    id: 'png-snob-avax',
     logo: 'avax-pairs/SNOB-AVAX.svg',
     name: 'SNOB-AVAX LP',
     token: 'SNOB-AVAX LP',
@@ -14,7 +14,7 @@ export const pools = [
     pricePerFullShare: 1,
     tvl: 0,
     oracle: 'lps',
-    oracleId: 'auto-snob-avax',
+    oracleId: 'png-snob-avax',
     oraclePrice: 0,
     depositsPaused: false,
     status: 'active',
@@ -26,7 +26,7 @@ export const pools = [
     poolId: 2
   },
     {
-    id: 'auto-png-avax',
+    id: 'png-png-avax',
     logo: 'avax-pairs/PNG-AVAX.svg',
     name: 'PNG-AVAX Snowglobe',
     token: 'PNG-AVAX LP',
@@ -40,7 +40,7 @@ export const pools = [
     pricePerFullShare: 1,
     tvl: 0,
     oracle: 'lps',
-    oracleId: 'auto-png-avax',
+    oracleId: 'png-png-avax',
     oraclePrice: 0,
     depositsPaused: false,
     status: 'active',
@@ -53,7 +53,7 @@ export const pools = [
 
   },
   {
-    id: 'auto-eth-avax',
+    id: 'png-eth-avax',
     logo: 'avax-pairs/ETH-AVAX.svg',
     name: 'ETH-AVAX Snowglobe',
     token: 'ETH-AVAX LP',
@@ -67,7 +67,7 @@ export const pools = [
     pricePerFullShare: 1,
     tvl: 0,
     oracle: 'lps',
-    oracleId: 'auto-eth-avax',
+    oracleId: 'png-eth-avax',
     oraclePrice: 0,
     depositsPaused: false,
     status: 'active',
@@ -80,7 +80,7 @@ export const pools = [
   },
 
   {
-    id: 'auto-sushi-avax',
+    id: 'png-sushi-avax',
     logo: 'avax-pairs/SUSHI-AVAX.svg',
     name: 'SUSHI-AVAX Snowglobe',
     token: 'SUSHI-AVAX LP',
@@ -94,7 +94,7 @@ export const pools = [
     pricePerFullShare: 1,
     tvl: 0,
     oracle: 'lps',
-    oracleId: 'auto-sushi-avax',
+    oracleId: 'png-sushi-avax',
     oraclePrice: 0,
     depositsPaused: false,
     status: 'active',
@@ -107,7 +107,7 @@ export const pools = [
 
   },
   {
-    id: 'auto-link-avax',
+    id: 'png-link-avax',
     logo: 'avax-pairs/LINK-AVAX.svg',
     name: 'LINK-AVAX Snowglobe',
     token: 'LINK-AVAX LP',
@@ -121,7 +121,7 @@ export const pools = [
     pricePerFullShare: 1,
     tvl: 0,
     oracle: 'lps',
-    oracleId: 'auto-link-avax',
+    oracleId: 'png-link-avax',
     oraclePrice: 0,
     depositsPaused: false,
     status: 'active',
