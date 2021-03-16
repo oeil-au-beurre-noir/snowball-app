@@ -73,6 +73,10 @@ const Pool = ({
         {fromPage == 'icequeen' &&
         <Stake
           fromPage={fromPage}
+          pool={pool}
+          balanceSingle={balanceSingle}
+          sharesBalance={sharesBalance}
+          index={index}
         />
         }
 

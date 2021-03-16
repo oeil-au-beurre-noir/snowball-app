@@ -37,6 +37,16 @@ const VisiblePools = ({
   const { sortedPools, order, setOrder } = useSortedPools(poolsByAsset, apys);
   const { visiblePools, fetchVisiblePools } = useVisiblePools(sortedPools, 10);
 
+  // var hideNonStakable
+  // if(fromPage === 'icequeen'){
+  //   var
+  // }
+
+
+
+
+  //let stakablePools = visiblePools.filter((pool) => pool.lockForSnob === true);
+
   return (
     <>
       {/*       <Filters
@@ -54,6 +64,8 @@ const VisiblePools = ({
       <div className={classes.scroller}>
         <InfiniteScroll dataLength={visiblePools.length} hasMore={true} next={fetchVisiblePools}>
           {visiblePools.map((pool, index) => (
+            // if we're on icequeen page we only display stakable 'lockForSnob' pools
+            (fromPage != 'icequeen'|| pool.lockForSnob == true ) ?
             <Pool
               pool={pool}
               poolsInfo={poolsInfo}
@@ -66,6 +78,7 @@ const VisiblePools = ({
               fetchVaultsDataDone={fetchVaultsDataDone}
               fromPage={fromPage}
             />
+            : null
           ))}
         </InfiniteScroll>
       </div>
