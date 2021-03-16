@@ -22,7 +22,8 @@ export const pools = [
     assets: ['SNOB', 'AVAX'],
     callFee: 0.5,
     lockForSnob: true,
-    lockRate: 0.5
+    lockRate: 0.5,
+    poolId: 2
   },
     {
     id: 'auto-png-avax',
@@ -47,7 +48,8 @@ export const pools = [
     assets: ['PNG', 'AVAX'],
     callFee: 0.5,
       lockForSnob: true,
-      lockRate: 0.25
+      lockRate: 0.25,
+      poolId: 3
 
   },
   {
@@ -73,7 +75,8 @@ export const pools = [
     assets: ['ETH', 'AVAX'],
     callFee: 0.5,
     lockForSnob: true,
-    lockRate: 0.125
+    lockRate: 0.125,
+    poolId: 4
   },
 
   {
@@ -99,7 +102,9 @@ export const pools = [
     assets: ['SUSHI', 'AVAX'],
     callFee: 0.5,
     lockForSnob: true,
-    lockRate: 0.125
+    lockRate: 0.125,
+    poolId: 1
+
   },
   {
     id: 'auto-link-avax',
@@ -124,7 +129,8 @@ export const pools = [
     assets: ['LINK', 'AVAX'],
     callFee: 0.5,
     lockForSnob: false,
-    lockRate: 0
+    lockRate: 0,
+    poolId: 5
   }
   /* keep a few in comment for the example
   {
