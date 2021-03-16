@@ -100,11 +100,36 @@ export const pools = [
     callFee: 0.5,
     lockForSnob: true,
     lockRate: 0.125
+  },
+  {
+    id: 'auto-link-avax',
+    logo: 'avax-pairs/LINK-AVAX.svg',
+    name: 'LINK-AVAX Snowglobe',
+    token: 'LINK-AVAX LP',
+    tokenDescription: 'Uses: Pangolin (Auto)',
+    tokenAddress: '0xbbc7fff833d27264aac8806389e02f717a5506c9',
+    tokenDecimals: 18,
+    tokenDescriptionUrl: '#',
+    earnedToken: 'sPGLLINK-AVAX',
+    earnedTokenAddress: '0x00933c16e06b1d15958317C2793BC54394Ae356C',
+    earnContractAddress: '0x00933c16e06b1d15958317C2793BC54394Ae356C',
+    pricePerFullShare: 1,
+    tvl: 0,
+    oracle: 'lps',
+    oracleId: 'auto-link-avax',
+    oraclePrice: 0,
+    depositsPaused: false,
+    status: 'active',
+    platform: 'Autofarm',
+    assets: ['LINK', 'AVAX'],
+    callFee: 0.5,
+    lockForSnob: false,
+    lockRate: 0
   }
   /* keep a few in comment for the example
   {
     id: 'bifi-maxi',
-    logo: 'single-assets/BIFI.sushi',
+    logo: 'single-assets/BIFI.link',
     name: 'BIFI Maxi',
     token: 'BIFI',
     tokenDescription: 'Uses: Beefy.Finance',
