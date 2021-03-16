@@ -1,14 +1,15 @@
-<svg width="67" height="51" viewBox="0 0 67 51" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="67" height="62" viewBox="0 0 67 62" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g filter="url(#filter0_d)">
-        <circle cx="25.5" cy="21.5" r="11.5" fill="url(#pattern0)"/>
-        <circle cx="25.5" cy="21.5" r="10.5" stroke="white" stroke-width="2"/>
+        <circle cx="25.5" cy="24.5" r="11.5" fill="url(#pattern0)"/>
+        <circle cx="25.5" cy="24.5" r="10.5" stroke="white" stroke-width="2"/>
     </g>
     <g filter="url(#filter1_d)">
-        <circle cx="40.8333" cy="21.5" r="11.5" fill="url(#pattern1)"/>
-        <circle cx="40.8333" cy="21.5" r="10.5" stroke="white" stroke-width="2"/>
+        <circle cx="40.833" cy="24.5" r="11.5" fill="url(#pattern1)"/>
+        <circle cx="40.833" cy="24.5" r="10.5" stroke="white" stroke-width="2"/>
     </g>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1429 62C14.8271 62 14.5243 61.8744 14.3011 61.6508C14.0778 61.4272 13.9524 61.1239 13.9524 60.8077V54.8462C13.9524 54.5299 14.0778 54.2267 14.3011 54.0031C14.5243 53.7795 14.8271 53.6538 15.1429 53.6538H19.9048V48.8846C19.9048 48.5684 20.0302 48.2651 20.2534 48.0415C20.4767 47.8179 20.7795 47.6923 21.0952 47.6923H22.1452C21.5842 47.4215 21.0338 47.1292 20.4952 46.816C18.6049 45.6845 16.8639 44.3198 15.3131 42.7538C10.4607 37.8927 8 31.9324 8 25.0385C8 18.1445 10.4607 12.1842 15.3131 7.32435C20.1655 2.4645 26.1167 0 33 0C39.8833 0 45.8345 2.4645 50.6869 7.32435C55.5393 12.1842 58 18.1445 58 25.0385C58 31.9324 55.5405 37.8915 50.6869 42.7526C49.1377 44.3171 47.3983 45.6802 45.5095 46.81C44.9691 47.1272 44.4155 47.4205 43.8536 47.6911H44.9048C45.2205 47.6911 45.5233 47.8167 45.7466 48.0403C45.9698 48.2639 46.0952 48.5672 46.0952 48.8834V53.6527H50.8571C51.0135 53.6527 51.1683 53.6835 51.3127 53.7434C51.4572 53.8033 51.5884 53.8912 51.6989 54.0019C51.8095 54.1126 51.8972 54.244 51.957 54.3887C52.0168 54.5333 52.0476 54.6884 52.0476 54.845V60.8065C52.0478 60.9632 52.0171 61.1184 51.9573 61.2631C51.8976 61.4079 51.8099 61.5395 51.6994 61.6504C51.5888 61.7612 51.4575 61.8491 51.313 61.9091C51.1685 61.9691 51.0136 62 50.8571 62H15.1429ZM49.6667 59.6154V56.0385H16.3333V59.6154H49.6667ZM43.7143 53.6538V50.0769H22.2857V53.6538H43.7143ZM56.0469 24.955C56.0469 37.5816 45.7284 47.8175 33 47.8175C20.2716 47.8175 9.95312 37.5816 9.95312 24.955C9.95312 12.3284 20.2716 2.09246 33 2.09246C45.7284 2.09246 56.0469 12.3284 56.0469 24.955ZM40.3706 7.57749L42.2677 7.23227L41.9225 9.12936L42.6212 11.1214L40.6292 10.4226L38.7322 10.7678L39.0774 8.87072L38.3786 6.87872L40.3706 7.57749Z" fill="#162A46"/>
     <defs>
-        <filter id="filter0_d" x="0" y="0" width="51" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <filter id="filter0_d" x="0" y="3" width="51" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
             <feFlood flood-opacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
             <feMorphology radius="2" operator="dilate" in="SourceAlpha" result="effect1_dropShadow"/>
@@ -21,7 +22,7 @@
         <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
             <use xlink:href="#image0" transform="scale(0.00390625)"/>
         </pattern>
-        <filter id="filter1_d" x="15.3333" y="0" width="51" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <filter id="filter1_d" x="15.333" y="3" width="51" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
             <feFlood flood-opacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
             <feMorphology radius="2" operator="dilate" in="SourceAlpha" result="effect1_dropShadow"/>
