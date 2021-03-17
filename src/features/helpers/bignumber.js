@@ -151,3 +151,10 @@ export function calculateReallyNum(total, sliderNum) {
   }
   return byDecimals((sliderNum / 100) * Number(total), 0).toFormat(4);
 }
+
+export function ethToWei(eth) {
+  return eth /1e18
+}
+export function weiToEth(wei) {
+  return wei * 10e17
+}
