@@ -13,8 +13,7 @@ const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
       <Grid container>
         {sharesBalance > 0 &&
           <>
-        <div>STAKE BUTTON GOES HERE</div>
-          <StakeSection index={index} pool={pool} balanceSingle={balanceSingle} />
+          <StakeSection index={index} pool={pool} balanceSingle={balanceSingle} sharesBalance={sharesBalance}/>
           </>
 
         }
