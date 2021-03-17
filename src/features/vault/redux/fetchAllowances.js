@@ -6,28 +6,28 @@ import {
   VAULT_FETCH_ALLOWANCES_FAILURE,
 } from './constants';
 import { MultiCall } from 'eth-multicall';
-import { snowGlobeABI, multicallBnbShimABI, iceQueenAddress } from '../../configure';
+import { snowGlobeABI, iceQueenAddress } from '../../configure';
 import BigNumber from 'bignumber.js';
 
-export function fetchAllowances({ address, web3, tokens }) {
+export function fetchAllowances({ address, web3, stakeTokens }) {
   return dispatch => {
     dispatch({
       type: VAULT_FETCH_ALLOWANCES_BEGIN,
     });
 
     const promise = new Promise((resolve, reject) => {
-      const tokensList = [];
-      for (let key in tokens) {
-        tokensList.push({
+      const stakeTokensList = [];
+      for (let key in stakeTokens) {
+        stakeTokensList.push({
           token: key,
-          tokenAddress: tokens[key].tokenAddress,
-          tokenAllowance: tokens[key].tokenAllowance,
+          tokenAddress: stakeTokens[key].tokenAddress,
+          tokenAllowance: stakeTokens[key].tokenAllowance,
         });
       }
 
       const multicall = new MultiCall(web3, '0xfca8Cd986b0Db175dec97C6A0A02dd7e4299eC68');
 
-      const calls = tokensList.map(token => {
+      const calls = stakeTokensList.map(token => {
           const tokenContract = new web3.eth.Contract(snowGlobeABI, token.tokenAddress);
           return {
             tokenAllowance: tokenContract.methods.allowance(iceQueenAddress),
@@ -39,9 +39,9 @@ export function fetchAllowances({ address, web3, tokens }) {
         .all([calls])
         .then(([results]) => {
           const newTokens = {};
-          for (let i = 0; i < tokensList.length; i++) {
-            newTokens[tokensList[i].token] = {
-              tokenAddress: tokensList[i].tokenAddress,
+          for (let i = 0; i < stakeTokensList.length; i++) {
+            newTokens[stakeTokensList[i].token] = {
+              tokenAddress: stakeTokensList[i].tokenAddress,
               tokenAllowance: new BigNumber(results[i].tokenAllowance).toNumber() || 0,
             };
           }
@@ -64,12 +64,12 @@ export function fetchAllowances({ address, web3, tokens }) {
   };
 }
 
-export function useFetchBalances() {
+export function useFetchAllowances() {
   const dispatch = useDispatch();
 
-  const { tokens, fetchAllowancesPending, fetchAllowancesDone } = useSelector(
+  const { stakeTokens, fetchAllowancesPending, fetchAllowancesDone } = useSelector(
     state => ({
-      tokens: state.vault.tokens,
+      stakeTokens: state.vault.stakeTokens,
       fetchAllowancesDone: state.vault.fetchAllowancesDone,
       fetchAllowancesPending: state.vault.fetchAllowancesPending,
     }),
@@ -84,7 +84,7 @@ export function useFetchBalances() {
   );
 
   return {
-    tokens,
+    stakeTokens,
     fetchAllowances: boundAction,
     fetchAllowancesDone,
     fetchAllowancesPending,
@@ -102,7 +102,7 @@ export function reducer(state, action) {
     case VAULT_FETCH_ALLOWANCES_SUCCESS:
       return {
         ...state,
-        tokens: action.data,
+        stakeTokens: action.data,
         fetchAllowancesDone: true,
         fetchAllowancesPending: false,
       };
