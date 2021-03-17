@@ -18,6 +18,7 @@ const Pool = ({
   poolsInfo,
   index,
   tokens,
+  stakeTokens,
   apy,
   fetchBalancesDone,
   fetchApysDone,
@@ -31,6 +32,12 @@ const Pool = ({
 
   let balanceSingle = byDecimals(tokens[pool.token].tokenBalance, pool.tokenDecimals);
   let sharesBalance = new BigNumber(tokens[pool.earnedToken].tokenBalance);
+  let tokenAllowance = 0
+  if(pool.lockForSnob){
+    let tokenAllowance = new BigNumber(stakeTokens[pool.earnedToken].tokenAllowance);
+    console.log(tokenAllowance)
+  }
+
 
   const checkLaunchpool = () => {
     for (let index in poolsInfo) {
@@ -76,6 +83,7 @@ const Pool = ({
           pool={pool}
           balanceSingle={balanceSingle}
           sharesBalance={sharesBalance}
+          tokenAllowance={tokenAllowance}
           index={index}
         />
         }

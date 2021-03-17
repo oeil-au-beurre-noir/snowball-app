@@ -5,7 +5,7 @@ import StakeSection from './StakeSection/StakeSection';
 import DepositSection from '../PoolDetails/DepositSection/DepositSection';
 
 
-const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
+const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,tokenAllowance, index}) => {
 
   return (
 
@@ -14,11 +14,12 @@ const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
         {sharesBalance > 0 &&
           <>
           <StakeSection index={index} pool={pool} balanceSingle={balanceSingle} sharesBalance={sharesBalance}/>
+          <div>{tokenAllowance}</div>
           </>
 
         }
         {sharesBalance == 0 &&
-        <div>YOU NEED TO DEPOSIT IN {pool.name} before you can stake for SNOB</div>
+        <div>YOU NEED TO DEPOSIT IN {pool.name} before you can stake for SNOB </div>
         }
 
       </Grid>

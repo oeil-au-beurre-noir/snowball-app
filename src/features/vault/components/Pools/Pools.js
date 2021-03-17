@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 
 import TVLLoader from './TVLLoader/TVLLoader';
 import { useConnectWallet } from '../../../home/redux/hooks';
-import { useFetchBalances, useFetchVaultsData, useFetchApys } from '../../redux/hooks';
+import { useFetchBalances, useFetchVaultsData, useFetchApys, useFetchAllowances } from '../../redux/hooks';
 import VisiblePools from '../VisiblePools/VisiblePools';
 import styles from './styles';
 import usePoolsTvl from '../../hooks/usePoolsTvl';
@@ -22,6 +22,7 @@ export default function Pools({ fromPage }) {
   const { pools, fetchVaultsData, fetchVaultsDataDone } = useFetchVaultsData();
   const { poolsInfo, fetchPoolsInfo } = useFetchPoolsInfo();
   const { tokens, fetchBalances, fetchBalancesDone } = useFetchBalances();
+  const { stakeTokens, fetchAllowances, fetchAllowancesDone } = useFetchAllowances();
   const { apys, fetchApys, fetchApysDone } = useFetchApys();
   const { poolsTvl } = usePoolsTvl(pools);
   const classes = useStyles();
@@ -34,6 +35,7 @@ export default function Pools({ fromPage }) {
     if (address && web3) {
       const fetch = () => {
         fetchBalances({ address, web3, tokens });
+        fetchAllowances({ address, web3, stakeTokens });
         fetchVaultsData({ address, web3, pools });
         fetchApys();
       };
@@ -45,7 +47,7 @@ export default function Pools({ fromPage }) {
 
     // Adding tokens and pools to this dep list, causes an endless loop, DDoSing the api
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [address, web3, fetchBalances, fetchVaultsData]);
+  }, [address, web3, fetchBalances, fetchVaultsData , fetchAllowances]);
 
   return (
     <Grid container className={classes.container}>
@@ -72,9 +74,11 @@ export default function Pools({ fromPage }) {
         poolsInfo={poolsInfo}
         apys={apys}
         tokens={tokens}
+        stakeTokens={stakeTokens}
         fetchBalancesDone={fetchBalancesDone}
         fetchApysDone={fetchApysDone}
         fetchVaultsDataDone={fetchVaultsDataDone}
+        fetchAllowancesDone={fetchAllowancesDone}
         fromPage={fromPage}
       />
     </Grid>

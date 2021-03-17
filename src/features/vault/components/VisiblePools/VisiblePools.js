@@ -21,8 +21,10 @@ const VisiblePools = ({
   pools,
   poolsInfo,
   tokens,
+  stakeTokens,
   apys,
   fetchBalancesDone,
+  fetchAllowancesDone,
   fetchApysDone,
   fetchVaultsDataDone,
   fromPage
@@ -36,6 +38,7 @@ const VisiblePools = ({
   const { poolsByAsset, asset, setAsset } = usePoolsByAsset(poolsByVaultType);
   const { sortedPools, order, setOrder } = useSortedPools(poolsByAsset, apys);
   const { visiblePools, fetchVisiblePools } = useVisiblePools(sortedPools, 10);
+
 
   // var hideNonStakable
   // if(fromPage === 'icequeen'){
@@ -71,11 +74,13 @@ const VisiblePools = ({
               poolsInfo={poolsInfo}
               index={index}
               tokens={tokens}
+              stakeTokens={stakeTokens}
               apy={apys[pool.id] || 0}
               key={pool.id}
               fetchBalancesDone={fetchBalancesDone}
               fetchApysDone={fetchApysDone}
               fetchVaultsDataDone={fetchVaultsDataDone}
+              fetchAllowancesDone={fetchAllowancesDone}
               fromPage={fromPage}
             />
             : null

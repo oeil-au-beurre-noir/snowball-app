@@ -28,9 +28,11 @@ export function fetchAllowances({ address, web3, stakeTokens }) {
       const multicall = new MultiCall(web3, '0xfca8Cd986b0Db175dec97C6A0A02dd7e4299eC68');
 
       const calls = stakeTokensList.map(token => {
+
           const tokenContract = new web3.eth.Contract(snowGlobeABI, token.tokenAddress);
+
           return {
-            tokenAllowance: tokenContract.methods.allowance(iceQueenAddress),
+            tokenAllowance: tokenContract.methods.allowance(address,iceQueenAddress),
           };
 
       });

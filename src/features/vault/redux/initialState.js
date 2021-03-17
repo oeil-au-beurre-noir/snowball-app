@@ -1,8 +1,9 @@
 import { pools } from '../../configure';
 
 const tokens = {};
+const stakeTokens = {};
 
-pools.forEach(({ token, tokenAddress, earnedToken, earnedTokenAddress }) => {
+pools.forEach(({ token, tokenAddress, earnedToken, earnedTokenAddress,lockForSnob }) => {
   tokens[token] = {
     tokenAddress: tokenAddress,
     tokenBalance: 0,
@@ -11,11 +12,22 @@ pools.forEach(({ token, tokenAddress, earnedToken, earnedTokenAddress }) => {
     tokenAddress: earnedTokenAddress,
     tokenBalance: 0,
   };
+
+  if(lockForSnob){
+    stakeTokens[earnedToken] = {
+      tokenAddress: earnedTokenAddress,
+      tokenAllowance: 0
+    }
+  }
+
 });
+
+
 
 const initialState = {
   pools,
   tokens,
+  stakeTokens,
   apys: {},
   fetchApysDone: false,
   fetchApysPending: false,
@@ -23,6 +35,8 @@ const initialState = {
   fetchVaultsDataPending: false,
   fetchBalancesDone: false,
   fetchBalancesPending: false,
+  fetchAllowancesDone: false,
+  fetchAllowancesPending: false,
   fetchApprovalPending: {},
   fetchDepositPending: {},
   fetchWithdrawPending: {},
