@@ -9,4 +9,5 @@ export { fetchPrice } from './fetchPrice';
 export { harvest } from './harvest';
 export { createWeb3Modal } from './createWeb3Modal';
 export { stake } from './stake';
+export { snowglobeApproval } from './snowglobeApproval';
 
