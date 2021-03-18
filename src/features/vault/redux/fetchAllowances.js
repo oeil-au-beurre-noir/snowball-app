@@ -6,7 +6,7 @@ import {
   VAULT_FETCH_ALLOWANCES_FAILURE,
 } from './constants';
 import { MultiCall } from 'eth-multicall';
-import { snowGlobeABI, iceQueenAddress } from '../../configure';
+import { snowGlobeABI,erc20ABI,  iceQueenAddress } from '../../configure';
 import BigNumber from 'bignumber.js';
 
 export function fetchAllowances({ address, web3, stakeTokens }) {
@@ -29,7 +29,7 @@ export function fetchAllowances({ address, web3, stakeTokens }) {
 
       const calls = stakeTokensList.map(token => {
 
-          const tokenContract = new web3.eth.Contract(snowGlobeABI, token.tokenAddress);
+          const tokenContract = new web3.eth.Contract(erc20ABI, token.tokenAddress);
 
           return {
             tokenAllowance: tokenContract.methods.allowance(address,iceQueenAddress),
