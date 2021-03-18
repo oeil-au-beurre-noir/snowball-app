@@ -9,7 +9,7 @@ import {
   VAULT_FETCH_VAULTS_DATA_FAILURE,
 } from './constants';
 import { fetchPrice } from '../../web3';
-import { erc20ABI, vaultABI } from '../../configure';
+import { erc20ABI, vaultABI , iceQueenAddress} from '../../configure';
 import { byDecimals } from 'features/helpers/bignumber';
 
 export function fetchVaultsData({ address, web3, pools }) {
@@ -28,6 +28,15 @@ export function fetchVaultsData({ address, web3, pools }) {
           allowance: token.methods.allowance(address, pool.earnContractAddress),
         };
       });
+
+      const stakeCalls = pools.map(pool => {
+        const bnbShimAddress = '0xC72E5edaE5D7bA628A2Acb39C8Aa0dbbD06daacF';
+        const snobContract = new web3.eth.Contract(erc20ABI, pool.earnContractAddress || bnbShimAddress);
+        return {
+          stakeAllowance: snobContract.methods.allowance(address, iceQueenAddress),
+        };
+      });
+
 
       const vaultCalls = pools.map(pool => {
         const vault = new web3.eth.Contract(vaultABI, pool.earnedTokenAddress);
@@ -50,6 +59,14 @@ export function fetchVaultsData({ address, web3, pools }) {
           callbackInner => {
             multicall
               .all([vaultCalls])
+              .then(([data]) => callbackInner(null, data))
+              .catch(error => {
+                return callbackInner(error.message || error);
+              });
+          },
+          callbackInner => {
+            multicall
+              .all([stakeCalls])
               .then(([data]) => callbackInner(null, data))
               .catch(error => {
                 return callbackInner(error.message || error);
@@ -89,12 +106,14 @@ export function fetchVaultsData({ address, web3, pools }) {
           const newPools = pools.map((pool, i) => {
             const allowance = web3.utils.fromWei(data[0][i].allowance, 'ether');
             const pricePerFullShare = byDecimals(data[1][i].pricePerFullShare, 18).toNumber();
+            const stakeAllowance = byDecimals(data[2][i].stakeAllowance, 18).toNumber();
             return {
               ...pool,
               allowance: new BigNumber(allowance).toNumber() || 0,
+              stakeAllowance: new BigNumber(stakeAllowance).toNumber() || 0,
               pricePerFullShare: new BigNumber(pricePerFullShare).toNumber() || 1,
               tvl: byDecimals(data[1][i].tvl, 18).toNumber(),
-              oraclePrice: data[2][i] || 0,
+              oraclePrice: data[3][i] || 0,
             };
           });
 

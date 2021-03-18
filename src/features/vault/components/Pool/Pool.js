@@ -32,7 +32,9 @@ const Pool = ({
 
   let balanceSingle = byDecimals(tokens[pool.token].tokenBalance, pool.tokenDecimals);
   let sharesBalance = new BigNumber(tokens[pool.earnedToken].tokenBalance);
+
   let tokenAllowance = 0
+
   if(pool.lockForSnob){
     let tokenAllowance = new BigNumber(stakeTokens[pool.earnedToken].tokenAllowance);
     console.log(tokenAllowance)
@@ -50,6 +52,7 @@ const Pool = ({
 
   return (
     <Grid item xs={12} container key={index} className={classes.container} spacing={0}>
+      {pool.allowance} {pool.stakeAllowance}
       <Accordion
         expanded={isOpen}
         className={classes.accordion}
