@@ -12,6 +12,7 @@ const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
     <AccordionDetails style={{ justifyContent: 'space-between' }}>
       <Grid container>
         {sharesBalance > 0 &&
+
           <>
           <StakeSection index={index} pool={pool} balanceSingle={balanceSingle} sharesBalance={sharesBalance}/>
           </>

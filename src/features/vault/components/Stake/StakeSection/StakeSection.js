@@ -138,22 +138,22 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
       />
       {vaultState.display === true ? vaultState.content : (
         <div>
-
+          {pool.stakeAllowance > 0 ?
             <div className={classes.showDetailButtonCon}>
-              <Button
-                className={`${classes.showDetailButton} ${classes.showDetailButtonOutlined}`}
-                color="primary"
-                disabled={
-                  pool.depositsPaused ||
-                  !Boolean(depositBalance.amount) ||
-                  fetchDepositPending[index] ||
-                  new BigNumber(depositBalance.amount).toNumber() > sharesBalance.toNumber()
-                }
-                onClick={() => onDeposit(false)}
-              >
-                {t('Vault-DepositButton')}
-              </Button>
-              {/*
+            <Button
+              className={`${classes.showDetailButton} ${classes.showDetailButtonOutlined}`}
+              color="primary"
+              disabled={
+                pool.depositsPaused ||
+                !Boolean(depositBalance.amount) ||
+                fetchDepositPending[index] ||
+                new BigNumber(depositBalance.amount).toNumber() > sharesBalance.toNumber()
+              }
+              onClick={() => onDeposit(false)}
+            >
+              {t('Vault-DepositButton')}
+            </Button>
+            {/*
                 Boolean(pool.tokenAddress) && (
                 <Button
                   className={`${classes.showDetailButton} ${classes.showDetailButtonContained}`}
@@ -167,8 +167,10 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
                   {t('Vault-DepositButtonAll')}
                 </Button>
               )*/}
-            </div>
-
+          </div>
+            :
+            <div>APPROVE BUTTON</div>
+          }
         </div>
       )}
       {pool.platform === 'Autofarm' ? <h3 className={classes.subtitle}>{t('Vault-DepositFee')}</h3> : ''}
