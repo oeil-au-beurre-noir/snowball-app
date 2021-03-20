@@ -55,8 +55,6 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
     if (isAll) {
 
       setStakeBalance({
-        //amount: format(sharesBalance),
-        // temp harrdcoded value
         amount: byDecimals(sharesBalance.toNumber(),pool.tokenDecimals),
         slider: 100,
       });
