@@ -7,13 +7,15 @@ import FormControl from '@material-ui/core/FormControl';
 import { useSnackbar } from 'notistack';
 
 import CustomOutlinedInput from 'components/CustomOutlinedInput/CustomOutlinedInput';
-import { useFetchDeposit, useFetchApproval, useFetchStaking } from 'features/vault/redux/hooks';
+import { useFetchDeposit, useFetchApproval, useFetchStakeApproval, useFetchStake } from 'features/vault/redux/hooks';
+
 import CustomSlider from 'components/CustomSlider/CustomSlider';
 import { useConnectWallet } from 'features/home/redux/hooks';
 import { inputLimitPass, inputFinalVal, shouldHideFromHarvest } from 'features/helpers/utils';
 import { byDecimals, calculateReallyNum, format } from 'features/helpers/bignumber';
 import Button from 'components/CustomButtons/Button.js';
 import styles from './styles';
+import { stake } from '../../../../web3';
 
 const useStyles = makeStyles(styles);
 
@@ -23,9 +25,14 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
   const { web3, address } = useConnectWallet();
   const { enqueueSnackbar } = useSnackbar();
   const { fetchApproval, fetchApprovalPending } = useFetchApproval();
+  const { fetchStakeApproval, fetchStakeApprovalPending } = useFetchStakeApproval();
+
   const { fetchDeposit, fetchDepositBnb, fetchDepositPending } = useFetchDeposit();
-  const { fetchStaking,fetchStakingPending } = useFetchStaking();
-  const [depositBalance, setDepositBalance] = useState({
+
+
+  const { fetchStake,fetchStakePending } = useFetchStake();
+
+  const [stakeBalance, setStakeBalance] = useState({
     amount: 0,
     slider: 0,
   });
@@ -34,7 +41,7 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
 
     const total = byDecimals(sharesBalance.toNumber(), pool.tokenDecimals)  ;
 
-    setDepositBalance({
+    setStakeBalance({
       amount: sliderNum === 0 ? 0 : calculateReallyNum(total, sliderNum),
       slider: sliderNum,
     });
@@ -43,43 +50,59 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
   };
 
 
-  const onDeposit = isAll => {
-
-    console.log("GOTCHA",isAll, sharesBalance);
+  const onStake = isAll => {
 
     if (isAll) {
-      setDepositBalance({
-        amount: format(sharesBalance),
+
+      setStakeBalance({
+        //amount: format(sharesBalance),
+        // temp harrdcoded value
+        amount: byDecimals(sharesBalance.toNumber(),pool.tokenDecimals),
         slider: 100,
       });
     }
-
 
     if (pool.depositsPaused) {
       console.error('Deposits paused!');
       return;
     }
 
-    let amountValue = depositBalance.amount
-      ? depositBalance.amount.replace(',', '')
-      : depositBalance.amount;
+    //
+    let amountValue = stakeBalance.amount
+      ? stakeBalance.amount.replace(',', '')
+      : stakeBalance.amount;
 
-    fetchStaking({
-        address,
+    if(isAll){
+      amountValue = byDecimals(sharesBalance.toNumber(),pool.tokenDecimals)
+    }
+
+    fetchStake({
         web3,
-        poolId: pool.poolId,
+        address,
+        isAll,
         amount: new BigNumber(amountValue)
           .multipliedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals))
           .toString(10),
+        poolId: pool.poolId,
         index
     }).then(() => enqueueSnackbar(t('Vault-DepositSuccess'), { variant: 'success' }))
       .catch(error => enqueueSnackbar(t('Vault-DepositError', { error }), { variant: 'error' }));
 
   }
 
-
+  const onApproval = () => {
+    fetchStakeApproval({
+      address,
+      web3,
+      earnedTokenAddress: pool.earnedTokenAddress,
+      index,
+    })
+      .then(() => enqueueSnackbar(t('Vault-ApprovalSuccess'), { variant: 'success' }))
+      .catch(error => enqueueSnackbar(t('Vault-ApprovalError', { error }), { variant: 'error' }));
+  };
 
   const changeDetailInputValue = event => {
+    console.log('changeDetailInputValue')
     let value = event.target.value;
     const total = byDecimals(sharesBalance.toNumber(),pool.tokenDecimals);
 
@@ -94,7 +117,7 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
       sliderNum = byDecimals(inputVal / total, 0).toFormat(2) * 100;
     }
 
-    setDepositBalance({
+    setStakeBalance({
       amount: inputFinalVal(value, total, pool.tokenDecimals),
       slider: sliderNum,
     });
@@ -126,14 +149,14 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
   return (
     <Grid item xs={12} md={shouldHideFromHarvest(pool.id) ? 6 : 5} className={classes.sliderDetailContainer}>
       <div className={classes.showDetailLeft}>
-        Available to deposit: {sharesBalance / 1e18}
+        Available to stake: {sharesBalance / 1e18}
       </div>
       <FormControl fullWidth variant="outlined" className={classes.numericInput}>
-        <CustomOutlinedInput value={depositBalance.amount} onChange={changeDetailInputValue} />
+        <CustomOutlinedInput value={stakeBalance.amount} onChange={changeDetailInputValue} />
       </FormControl>
       <CustomSlider
         aria-labelledby="continuous-slider"
-        value={depositBalance.slider}
+        value={stakeBalance.slider}
         onChange={handleDepositedBalance}
       />
       {vaultState.display === true ? vaultState.content : (
@@ -145,31 +168,39 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
               color="primary"
               disabled={
                 pool.depositsPaused ||
-                !Boolean(depositBalance.amount) ||
-                fetchDepositPending[index] ||
-                new BigNumber(depositBalance.amount).toNumber() > sharesBalance.toNumber()
+                !Boolean(stakeBalance.amount) ||
+                fetchStakePending[index] ||
+                new BigNumber(stakeBalance.amount).toNumber() > sharesBalance.toNumber()
               }
-              onClick={() => onDeposit(false)}
+              onClick={() => onStake(false)}
             >
-              {t('Vault-DepositButton')}
+              STAKE
             </Button>
-            {/*
-                Boolean(pool.tokenAddress) && (
-                <Button
+               <Button
                   className={`${classes.showDetailButton} ${classes.showDetailButtonContained}`}
                   disabled={
                     pool.depositsPaused ||
-                    fetchDepositPending[index] ||
-                    new BigNumber(depositBalance.amount).toNumber() > balanceSingle.toNumber()
+                    fetchStakePending[index] ||
+                    new BigNumber(stakeBalance.amount).toNumber() > sharesBalance.toNumber()
                   }
-                  onClick={() => onDeposit(true)}
+                  onClick={() => onStake(true)}
                 >
-                  {t('Vault-DepositButtonAll')}
+                  STAKE ALL
                 </Button>
-              )*/}
+
           </div>
             :
-            <div>APPROVE BUTTON</div>
+            <div className={classes.showDetailButtonCon}>
+              <Button
+                className={`${classes.showDetailButton} ${classes.showDetailButtonContained}`}
+                onClick={onApproval}
+                disabled={pool.depositsPaused || fetchStakeApprovalPending[index]}
+              >
+                {fetchStakeApprovalPending[index]
+                  ? `${t('Vault-Approving')}`
+                  : `${t('Vault-ApproveButton')}`}
+              </Button>
+            </div>
           }
         </div>
       )}

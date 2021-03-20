@@ -3,7 +3,9 @@ import { iceQueenAddress } from '../configure';
 import BigNumber from 'bignumber.js';
 import { enqueueSnackbar } from '../common/redux/actions';
 
-export const stake = ({ web3, address, poolId, amount, dispatch }) => {
+export const stake = ({ web3, address,isAll, amount, poolId, dispatch }) => {
+
+  console.log('about to stake', amount,"into pool", poolId);
 
   return new Promise((resolve, reject) => {
 

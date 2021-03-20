@@ -3,6 +3,7 @@ import BigNumber from 'bignumber.js';
 import { enqueueSnackbar } from '../common/redux/actions';
 
 export const approval = ({ web3, address, tokenAddress, contractAddress, dispatch }) => {
+  console.log('approving', contractAddress,' to spend on behalf of contract',tokenAddress)
   return new Promise((resolve, reject) => {
     const contract = new web3.eth.Contract(erc20ABI, tokenAddress);
 
