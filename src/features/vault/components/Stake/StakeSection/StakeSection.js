@@ -61,8 +61,7 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
         slider: 100,
       });
     }
-    console.log(sharesBalance)
-    console.log('stakebalance', stakeBalance.amount)
+
     if (pool.depositsPaused) {
       console.error('Deposits paused!');
       return;
