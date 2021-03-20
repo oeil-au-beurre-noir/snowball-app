@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AccordionDetails from '@material-ui/core/AccordionActions';
 import Grid from '@material-ui/core/Grid';
 import StakeSection from './StakeSection/StakeSection';
-import DepositSection from '../PoolDetails/DepositSection/DepositSection';
+//import WithdrawStakeSection from './WithdrawStakeSection/WithdrawStakeSection';
 
 
 const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
@@ -15,11 +15,12 @@ const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
 
           <>
           <StakeSection index={index} pool={pool} balanceSingle={balanceSingle} sharesBalance={sharesBalance}/>
+          {/*<WithdrawStakeSection index={index} pool={pool} balanceSingle={balanceSingle} sharesBalance={sharesBalance}/>*/}
           </>
 
         }
         {sharesBalance == 0 &&
-        <div>YOU NEED TO DEPOSIT IN {pool.name} before you can stake for SNOB</div>
+        <div>YOU NEED TO DEPOSIT IN {pool.name}  before you can stake for SNOB</div>
         }
 
       </Grid>
