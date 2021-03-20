@@ -17,6 +17,7 @@ import SummaryActions from './SummaryActions/SummaryActions';
 const useStyles = makeStyles(styles);
 
 const PoolSummary = ({
+  fromPage,
   pool,
   launchpool,
   toggleCard,
@@ -98,6 +99,16 @@ const PoolSummary = ({
                 md={3}
                 align="start"
               />
+              { fromPage == 'icequeen' &&
+              <LabeledStat
+                value={Number(pool.pendingSnowballs).toFixed(2)}
+                label={'Pending $SNOB'}
+                isLoading={!fetchBalancesDone}
+                xs={5}
+                md={3}
+                align="start"
+              />
+              }
               <LabeledStat
                 value={formatApy(apy)}
                 label={t('Vault-APY')}

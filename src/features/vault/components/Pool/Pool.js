@@ -51,6 +51,7 @@ const Pool = ({
         TransitionProps={{ unmountOnExit: true }}
       >
         <PoolSummary
+          fromPage={fromPage}
           pool={pool}
           launchpool={checkLaunchpool()}
           balanceSingle={balanceSingle}
