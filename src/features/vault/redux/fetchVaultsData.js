@@ -37,6 +37,13 @@ export function fetchVaultsData({ address, web3, pools }) {
         };
       });
 
+      const pendingSnowballsCalls = pools.map(pool => {
+        const icequeenContract = new web3.eth.Contract(iceQueenABI, iceQueenAddress);
+        return {
+          pendingSnowballs: icequeenContract.methods.pendingSnowball(pool.poolId,address),
+        };
+      });
+
       const currentStakeCalls = pools.map(pool => {
         const icequeenContract = new web3.eth.Contract(iceQueenABI, iceQueenAddress);
         return {
@@ -88,6 +95,14 @@ export function fetchVaultsData({ address, web3, pools }) {
               });
           },
           callbackInner => {
+            multicall
+              .all([pendingSnowballsCalls])
+              .then(([data]) => callbackInner(null, data))
+              .catch(error => {
+                return callbackInner(error.message || error);
+              });
+          },
+          callbackInner => {
             async.map(
               pools,
               (pool, callbackInnerInner) => {
@@ -122,6 +137,9 @@ export function fetchVaultsData({ address, web3, pools }) {
             const allowance = web3.utils.fromWei(data[0][i].allowance, 'ether');
             const pricePerFullShare = byDecimals(data[1][i].pricePerFullShare, 18).toNumber();
             const stakeAllowance = byDecimals(data[2][i].stakeAllowance, 18).toNumber();
+            const userInfo = data[3][i].userInfo
+            const pendingSnowballs = byDecimals(data[4][i].pendingSnowballs, 18).toNumber();
+
 
             return {
               ...pool,
@@ -129,8 +147,9 @@ export function fetchVaultsData({ address, web3, pools }) {
               stakeAllowance: new BigNumber(stakeAllowance).toNumber() || 0,
               pricePerFullShare: new BigNumber(pricePerFullShare).toNumber() || 1,
               tvl: byDecimals(data[1][i].tvl, 18).toNumber(),
-              userInfo: data[3][i] || 0,
-              oraclePrice: data[4][i] || 0,
+              pendingSnowballs,
+              userInfo,
+              oraclePrice: data[5][i] || 0,
             };
           });
 
