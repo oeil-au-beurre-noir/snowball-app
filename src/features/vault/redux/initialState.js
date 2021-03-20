@@ -26,6 +26,7 @@ const initialState = {
   fetchApprovalPending: {},
   fetchStakeApprovalPending: {},
   fetchDepositPending: {},
+  fetchStakePending: {},
   fetchWithdrawPending: {},
   fetchHarvestPending: {},
   fetchStakingPending: {},

@@ -7,7 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { useSnackbar } from 'notistack';
 
 import CustomOutlinedInput from 'components/CustomOutlinedInput/CustomOutlinedInput';
-import { useFetchDeposit, useFetchApproval, useFetchStakeApproval, useFetchStaking } from 'features/vault/redux/hooks';
+import { useFetchDeposit, useFetchApproval, useFetchStakeApproval, useFetchStake } from 'features/vault/redux/hooks';
 
 import CustomSlider from 'components/CustomSlider/CustomSlider';
 import { useConnectWallet } from 'features/home/redux/hooks';
@@ -27,7 +27,10 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
   const { fetchStakeApproval, fetchStakeApprovalPending } = useFetchStakeApproval();
 
   const { fetchDeposit, fetchDepositBnb, fetchDepositPending } = useFetchDeposit();
-  const { fetchStaking,fetchStakingPending } = useFetchStaking();
+
+
+  const { fetchStake,fetchStakePending } = useFetchStake();
+
   const [depositBalance, setDepositBalance] = useState({
     amount: 0,
     slider: 0,
@@ -46,34 +49,34 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
   };
 
 
-  const onDeposit = isAll => {
+  const onStake = isAll => {
 
-    console.log("GOTCHA",isAll, sharesBalance);
+    // if (isAll) {
+    //   setDepositBalance({
+    //     //amount: format(sharesBalance),
+    //     // temp harrdcoded value
+    //     amount: format(0.06),
+    //     slider: 100,
+    //   });
+    // }
+    //
+    //
+    // if (pool.depositsPaused) {
+    //   console.error('Deposits paused!');
+    //   return;
+    // }
+    // //
+    // // let amountValue = depositBalance.amount
+    // //   ? depositBalance.amount.replace(',', '')
+    // //   : depositBalance.amount;
 
-    if (isAll) {
-      setDepositBalance({
-        amount: format(sharesBalance),
-        slider: 100,
-      });
-    }
 
-
-    if (pool.depositsPaused) {
-      console.error('Deposits paused!');
-      return;
-    }
-
-    let amountValue = depositBalance.amount
-      ? depositBalance.amount.replace(',', '')
-      : depositBalance.amount;
-
-    fetchStaking({
-        address,
+    fetchStake({
         web3,
+        address,
+        isAll,
+        amount: 600000000,
         poolId: pool.poolId,
-        amount: new BigNumber(amountValue)
-          .multipliedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals))
-          .toString(10),
         index
     }).then(() => enqueueSnackbar(t('Vault-DepositSuccess'), { variant: 'success' }))
       .catch(error => enqueueSnackbar(t('Vault-DepositError', { error }), { variant: 'error' }));
@@ -161,24 +164,22 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
                 fetchDepositPending[index] ||
                 new BigNumber(depositBalance.amount).toNumber() > sharesBalance.toNumber()
               }
-              onClick={() => onDeposit(false)}
+              onClick={() => onStake(false)}
             >
               {t('Vault-DepositButton')}
             </Button>
-            {/*
-                Boolean(pool.tokenAddress) && (
-                <Button
+               <Button
                   className={`${classes.showDetailButton} ${classes.showDetailButtonContained}`}
                   disabled={
                     pool.depositsPaused ||
                     fetchDepositPending[index] ||
                     new BigNumber(depositBalance.amount).toNumber() > balanceSingle.toNumber()
                   }
-                  onClick={() => onDeposit(true)}
+                  onClick={() => onStake(true)}
                 >
                   {t('Vault-DepositButtonAll')}
                 </Button>
-              )*/}
+
           </div>
             :
             <div className={classes.showDetailButtonCon}>
