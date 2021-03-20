@@ -5,7 +5,6 @@ import { enqueueSnackbar } from '../common/redux/actions';
 
 export const withdrawStake = ({ web3, address, amount, poolId, dispatch }) => {
 
-  console.log(amount.toNumber())
   return new Promise((resolve, reject) => {
 
     const contract = new web3.eth.Contract(iceQueenABI, iceQueenAddress);
