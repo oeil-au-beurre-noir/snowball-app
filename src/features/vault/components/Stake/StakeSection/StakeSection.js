@@ -31,7 +31,7 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
 
   const { fetchStake,fetchStakePending } = useFetchStake();
 
-  const [depositBalance, setDepositBalance] = useState({
+  const [stakeBalance, setStakeBalance] = useState({
     amount: 0,
     slider: 0,
   });
@@ -40,7 +40,7 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
 
     const total = byDecimals(sharesBalance.toNumber(), pool.tokenDecimals)  ;
 
-    setDepositBalance({
+    setStakeBalance({
       amount: sliderNum === 0 ? 0 : calculateReallyNum(total, sliderNum),
       slider: sliderNum,
     });
@@ -51,31 +51,38 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
 
   const onStake = isAll => {
 
-    // if (isAll) {
-    //   setDepositBalance({
-    //     //amount: format(sharesBalance),
-    //     // temp harrdcoded value
-    //     amount: format(0.06),
-    //     slider: 100,
-    //   });
-    // }
-    //
-    //
-    // if (pool.depositsPaused) {
-    //   console.error('Deposits paused!');
-    //   return;
-    // }
-    // //
-    // // let amountValue = depositBalance.amount
-    // //   ? depositBalance.amount.replace(',', '')
-    // //   : depositBalance.amount;
+    if (isAll) {
 
+      console.log("hello")
+      setStakeBalance({
+        //amount: format(sharesBalance),
+        // temp harrdcoded value
+        amount: byDecimals(sharesBalance.toNumber(),pool.tokenDecimals),
+        slider: 100,
+      });
+    }
+
+    if (pool.depositsPaused) {
+      console.error('Deposits paused!');
+      return;
+    }
+    //
+    let amountValue = stakeBalance.amount
+      ? stakeBalance.amount.replace(',', '')
+      : stakeBalance.amount;
+
+    if(isAll){
+      amountValue = sharesBalance
+    }
+    console.log('format : ', amountValue)
 
     fetchStake({
         web3,
         address,
         isAll,
-        amount: 600000000,
+        amount: new BigNumber(amountValue)
+          .multipliedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals))
+          .toString(10),
         poolId: pool.poolId,
         index
     }).then(() => enqueueSnackbar(t('Vault-DepositSuccess'), { variant: 'success' }))
@@ -109,7 +116,7 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
       sliderNum = byDecimals(inputVal / total, 0).toFormat(2) * 100;
     }
 
-    setDepositBalance({
+    setStakeBalance({
       amount: inputFinalVal(value, total, pool.tokenDecimals),
       slider: sliderNum,
     });
@@ -141,14 +148,14 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
   return (
     <Grid item xs={12} md={shouldHideFromHarvest(pool.id) ? 6 : 5} className={classes.sliderDetailContainer}>
       <div className={classes.showDetailLeft}>
-        Available to deposit: {sharesBalance / 1e18}
+        Available to stake: {sharesBalance / 1e18}
       </div>
       <FormControl fullWidth variant="outlined" className={classes.numericInput}>
-        <CustomOutlinedInput value={depositBalance.amount} onChange={changeDetailInputValue} />
+        <CustomOutlinedInput value={stakeBalance.amount} onChange={changeDetailInputValue} />
       </FormControl>
       <CustomSlider
         aria-labelledby="continuous-slider"
-        value={depositBalance.slider}
+        value={stakeBalance.slider}
         onChange={handleDepositedBalance}
       />
       {vaultState.display === true ? vaultState.content : (
@@ -160,24 +167,24 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
               color="primary"
               disabled={
                 pool.depositsPaused ||
-                !Boolean(depositBalance.amount) ||
-                fetchDepositPending[index] ||
-                new BigNumber(depositBalance.amount).toNumber() > sharesBalance.toNumber()
+                !Boolean(stakeBalance.amount) ||
+                fetchStakePending[index] ||
+                new BigNumber(stakeBalance.amount).toNumber() > sharesBalance.toNumber()
               }
               onClick={() => onStake(false)}
             >
-              {t('Vault-DepositButton')}
+              STAKE
             </Button>
                <Button
                   className={`${classes.showDetailButton} ${classes.showDetailButtonContained}`}
                   disabled={
                     pool.depositsPaused ||
-                    fetchDepositPending[index] ||
-                    new BigNumber(depositBalance.amount).toNumber() > balanceSingle.toNumber()
+                    fetchStakePending[index] ||
+                    new BigNumber(stakeBalance.amount).toNumber() > sharesBalance.toNumber()
                   }
                   onClick={() => onStake(true)}
                 >
-                  {t('Vault-DepositButtonAll')}
+                  STAKE ALL
                 </Button>
 
           </div>
