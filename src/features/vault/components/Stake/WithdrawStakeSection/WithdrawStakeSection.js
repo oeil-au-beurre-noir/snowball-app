@@ -9,8 +9,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from 'components/CustomButtons/Button.js';
 import CustomOutlinedInput from 'components/CustomOutlinedInput/CustomOutlinedInput';
 import CustomSlider from 'components/CustomSlider/CustomSlider';
-import RefundButtons from '../RefundButtons/RefundButtons';
-import { byDecimals, calculateReallyNum } from 'features/helpers/bignumber';
+import RefundButtons from '../../PoolDetails/RefundButtons/RefundButtons';
+import { byDecimals, calculateReallyNum, format } from 'features/helpers/bignumber';
 import { inputLimitPass, inputFinalVal, shouldHideFromHarvest } from 'features/helpers/utils';
 import { useFetchWithdraw } from 'features/vault/redux/hooks';
 import { useConnectWallet } from 'features/home/redux/hooks';
@@ -109,13 +109,16 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
   return (
     <Grid item xs={12} md={shouldHideFromHarvest(pool.name) ? 6 : 5} className={classes.sliderDetailContainer}>
       <div className={classes.showDetailLeft}>
-        {t('Vault-Deposited')}:{' '}
-        {byDecimals(
-          sharesBalance.multipliedBy(new BigNumber(pool.pricePerFullShare)),
-          pool.tokenDecimals
-        ).toFormat(4)}{' '}
-        {pool.token}
+        Deposited:
+        {Number(pool.userInfo[0] /1e18).toFixed(2)}
+        &nbsp;
+        sPGL
+
+
       </div>
+      <br/>
+
+
       <FormControl fullWidth variant="outlined">
         <CustomOutlinedInput value={withdrawAmount.amount} onChange={onInputChange} />
       </FormControl>

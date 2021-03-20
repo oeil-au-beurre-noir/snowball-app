@@ -79,6 +79,8 @@ const PoolSummary = ({
         <Grid item md={7} xs={4}>
           <Grid item container justify="space-between">
             <Hidden smDown>
+
+              {fromPage == 'snowglobes' &&
               <LabeledStat
                 value={formatDecimals(balanceSingle)}
                 label={t('Vault-Balance')}
@@ -86,19 +88,35 @@ const PoolSummary = ({
                 xs={5}
                 md={3}
               />
+              }
+
               <LabeledStat
-                value={formatDecimals(
+                value={Number(formatDecimals(
                   byDecimals(
                     sharesBalance.multipliedBy(new BigNumber(pool.pricePerFullShare)),
                     pool.tokenDecimals
                   )
-                )}
-                label={t('Vault-Deposited')}
+                )).toFixed(2)}
+                label={fromPage === 'snowglobes' ? 'Deposited' : 'Balance'}
                 isLoading={!fetchBalancesDone}
                 xs={5}
                 md={3}
                 align="start"
               />
+
+
+              { fromPage === 'icequeen' &&
+              <LabeledStat
+                value={Number(pool.userInfo[0] /1e18).toFixed(2)}
+                label={'Deposited'}
+                isLoading={!fetchBalancesDone}
+                xs={5}
+                md={3}
+                align="start"
+              />
+              }
+
+
               { fromPage == 'icequeen' &&
               <LabeledStat
                 value={Number(pool.pendingSnowballs).toFixed(2)}
