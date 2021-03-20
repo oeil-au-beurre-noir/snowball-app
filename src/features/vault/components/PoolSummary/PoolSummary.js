@@ -105,7 +105,7 @@ const PoolSummary = ({
               />
 
 
-              { fromPage === 'icequeen' &&
+              { fromPage === 'icequeen' && pool.userInfo &&
               <LabeledStat
                 value={Number(pool.userInfo[0] /1e18).toFixed(2)}
                 label={'Deposited'}

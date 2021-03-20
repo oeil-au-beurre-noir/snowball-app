@@ -12,7 +12,7 @@ import CustomSlider from 'components/CustomSlider/CustomSlider';
 import RefundButtons from '../../PoolDetails/RefundButtons/RefundButtons';
 import { byDecimals, calculateReallyNum, format } from 'features/helpers/bignumber';
 import { inputLimitPass, inputFinalVal, shouldHideFromHarvest } from 'features/helpers/utils';
-import { useFetchWithdraw } from 'features/vault/redux/hooks';
+import { useFetchWithdrawStake } from 'features/vault/redux/hooks';
 import { useConnectWallet } from 'features/home/redux/hooks';
 import styles from './styles';
 
@@ -23,16 +23,17 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
   const classes = useStyles();
   const { web3, address } = useConnectWallet();
   const { enqueueSnackbar } = useSnackbar();
-  const { fetchWithdraw, fetchWithdrawBnb, fetchWithdrawPending } = useFetchWithdraw();
-  const { fetchWithdrawStake, fetchWithdrawStakePending } = useFetchWithdraw();
-  const [withdrawStakeAmount, setWithdrawStakeAmount] = useState({ amount: 0, slider: 0 });
+  const { fetchWithdrawStake, fetchWithdrawStakePending } = useFetchWithdrawStake();
+  const [withdrawAmount, setWithdrawAmount] = useState({ amount: 0, slider: 0 });
 
   const onSliderChange = (_, sliderNum) => {
-    const total = sharesBalance
+    const total_raw = new BigNumber(pool.userInfo[0])
+
+    const total = total_raw
       .multipliedBy(new BigNumber(pool.pricePerFullShare))
       .dividedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals));
 
-    setWithdrawStakeAmount({
+    setWithdrawAmount({
       amount: sliderNum === 0 ? 0 : calculateReallyNum(total, sliderNum),
       slider: sliderNum,
     });
@@ -40,9 +41,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
 
   const onInputChange = event => {
     const value = event.target.value;
-    const total = sharesBalance
-      .multipliedBy(new BigNumber(pool.pricePerFullShare))
-      .dividedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals));
+    const total = pool.userInfo[0]
 
     if (!inputLimitPass(value, pool.tokenDecimals)) {
       return;
@@ -52,10 +51,10 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
     let sliderNum = 0;
     if (value) {
       inputVal = Number(value.replace(',', ''));
-      sliderNum = Math.round(byDecimals(inputVal / total, 0).toNumber() * 100);
+      sliderNum = Math.round(byDecimals(inputVal / total, 0).toNumber() );
     }
 
-    setWithdrawStakeAmount({
+    setWithdrawAmount({
       amount: inputFinalVal(value, total, pool.tokenDecimals),
       slider: sliderNum,
     });
@@ -63,30 +62,35 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
 
   const onWithdraw = isAll => {
     if (isAll) {
-      setWithdrawStakeAmount({
-        amount: pool.userInfo[0],
+      const total_raw = new BigNumber(pool.userInfo[0])
+
+      const total = total_raw
+        .multipliedBy(new BigNumber(pool.pricePerFullShare))
+        .dividedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals));
+
+      setWithdrawAmount({
+        amount: total,
         slider: 100,
       });
     }
 
-    if (withdrawStakeAmount.slider >= 99) {
+    if (withdrawAmount.slider >= 99) {
       isAll = true;
     }
 
-    const amountValue = withdrawStakeAmount.amount
-      ? withdrawStakeAmount.amount.replace(',', '')
-      : withdrawStakeAmount.amount;
+    const amountValue = withdrawAmount.amount
+      ? withdrawAmount.amount.replace(',', '')
+      : withdrawAmount.amount;
 
       fetchWithdrawStake({
-        address,
         web3,
-        isAll,
+        address,
         amount: new BigNumber(amountValue)
           .multipliedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals))
           .dividedBy(pool.pricePerFullShare)
           .toFixed(0),
-        contractAddress: pool.earnContractAddress,
-        index,
+        poolId: pool.poolId,
+        index
       })
         .then(() => enqueueSnackbar(t('Vault-WithdrawSuccess'), { variant: 'success' }))
         .catch(error => enqueueSnackbar(t('Vault-WithdrawError', { error }), { variant: 'error' }));
@@ -96,6 +100,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
 
   return (
     <Grid item xs={12} md={shouldHideFromHarvest(pool.name) ? 6 : 5} className={classes.sliderDetailContainer}>
+
       <div className={classes.showDetailLeft}>
         Deposited:
         {Number(pool.userInfo[0] /1e18).toFixed(2)}
@@ -108,11 +113,11 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
 
 
       <FormControl fullWidth variant="outlined">
-        <CustomOutlinedInput value={withdrawStakeAmount.amount} onChange={onInputChange} />
+        <CustomOutlinedInput value={withdrawAmount.amount} onChange={onInputChange} />
       </FormControl>
       <CustomSlider
         aria-labelledby="continuous-slider"
-        value={withdrawStakeAmount.slider}
+        value={withdrawAmount.slider}
         onChange={onSliderChange}
       />
       <div className={classes.showDetailButtonCon}>
@@ -123,9 +128,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
               color="primary"
               onClick={() => onWithdraw(false)}
             >
-              {fetchWithdrawStakePending[index]
-                ? `${t('Vault-Withdrawing')}`
-                : `${t('Vault-WithdrawButton')}`}
+              WITHDRAW
             </Button>
             <Button
               className={`${classes.showDetailButton} ${classes.showDetailButtonOutlined}`}
@@ -133,9 +136,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
               color="primary"
               onClick={() => onWithdraw(true)}
             >
-              {fetchWithdrawStakePending[index]
-                ? `${t('Vault-Withdrawing')}`
-                : `${t('Vault-WithdrawButtonAll')}`}
+              WITHDRAW ALL
             </Button>
           </>
 

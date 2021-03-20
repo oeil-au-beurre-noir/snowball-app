@@ -3,10 +3,9 @@ import { iceQueenAddress } from '../configure';
 import BigNumber from 'bignumber.js';
 import { enqueueSnackbar } from '../common/redux/actions';
 
-export const withdrawStake = ({ web3, address,isAll, amount, poolId, dispatch }) => {
+export const withdrawStake = ({ web3, address, amount, poolId, dispatch }) => {
 
-  console.log('about to withdraw', amount,"from stake", poolId);
-
+  console.log(amount.toNumber())
   return new Promise((resolve, reject) => {
 
     const contract = new web3.eth.Contract(iceQueenABI, iceQueenAddress);

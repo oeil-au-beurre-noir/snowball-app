@@ -5,9 +5,9 @@ import {
   VAULT_FETCH_WITHDRAW_STAKE_SUCCESS,
   VAULT_FETCH_WITHDRAW_STAKE_FAILURE,
 } from './constants';
-import { stake } from '../../web3';
+import { withdrawStake } from '../../web3';
 
-export function fetchWithdrawStake({ web3, address, isAll, amount, poolId, index }) {
+export function fetchWithdrawStake({ web3, address, amount, poolId, index }) {
   return dispatch => {
     dispatch({
       type: VAULT_FETCH_WITHDRAW_STAKE_BEGIN,
@@ -15,7 +15,7 @@ export function fetchWithdrawStake({ web3, address, isAll, amount, poolId, index
     });
 
     const promise = new Promise((resolve, reject) => {
-      stake({ web3, address, isAll, amount, poolId, dispatch })
+      withdrawStake({ web3, address,  amount, poolId, dispatch })
         .then(data => {
           dispatch({
             type: VAULT_FETCH_WITHDRAW_STAKE_SUCCESS,
