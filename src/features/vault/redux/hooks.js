@@ -7,4 +7,3 @@ export { useFetchStake } from './fetchStake';
 export { useFetchWithdraw } from './fetchWithdraw';
 export { useFetchApys } from './fetchApys';
 export { useFetchHarvest } from './fetchHarvest';
-export { useFetchStaking } from './fetchStaking';
