@@ -7,7 +7,8 @@ import FormControl from '@material-ui/core/FormControl';
 import { useSnackbar } from 'notistack';
 
 import CustomOutlinedInput from 'components/CustomOutlinedInput/CustomOutlinedInput';
-import { useFetchDeposit, useFetchApproval, useFetchStaking } from 'features/vault/redux/hooks';
+import { useFetchDeposit, useFetchApproval, useFetchStakeApproval, useFetchStaking } from 'features/vault/redux/hooks';
+
 import CustomSlider from 'components/CustomSlider/CustomSlider';
 import { useConnectWallet } from 'features/home/redux/hooks';
 import { inputLimitPass, inputFinalVal, shouldHideFromHarvest } from 'features/helpers/utils';
@@ -23,6 +24,8 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
   const { web3, address } = useConnectWallet();
   const { enqueueSnackbar } = useSnackbar();
   const { fetchApproval, fetchApprovalPending } = useFetchApproval();
+  const { fetchStakeApproval, fetchStakeApprovalPending } = useFetchStakeApproval();
+
   const { fetchDeposit, fetchDepositBnb, fetchDepositPending } = useFetchDeposit();
   const { fetchStaking,fetchStakingPending } = useFetchStaking();
   const [depositBalance, setDepositBalance] = useState({
@@ -77,7 +80,16 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
 
   }
 
-
+  const onApproval = () => {
+    fetchStakeApproval({
+      address,
+      web3,
+      earnedTokenAddress: pool.earnedTokenAddress,
+      index,
+    })
+      .then(() => enqueueSnackbar(t('Vault-ApprovalSuccess'), { variant: 'success' }))
+      .catch(error => enqueueSnackbar(t('Vault-ApprovalError', { error }), { variant: 'error' }));
+  };
 
   const changeDetailInputValue = event => {
     let value = event.target.value;
@@ -169,7 +181,17 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
               )*/}
           </div>
             :
-            <div>APPROVE BUTTON</div>
+            <div className={classes.showDetailButtonCon}>
+              <Button
+                className={`${classes.showDetailButton} ${classes.showDetailButtonContained}`}
+                onClick={onApproval}
+                disabled={pool.depositsPaused || fetchStakeApprovalPending[index]}
+              >
+                {fetchStakeApprovalPending[index]
+                  ? `${t('Vault-Approving')}`
+                  : `${t('Vault-ApproveButton')}`}
+              </Button>
+            </div>
           }
         </div>
       )}
