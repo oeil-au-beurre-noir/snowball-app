@@ -24,14 +24,15 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
   const { web3, address } = useConnectWallet();
   const { enqueueSnackbar } = useSnackbar();
   const { fetchWithdraw, fetchWithdrawBnb, fetchWithdrawPending } = useFetchWithdraw();
-  const [withdrawAmount, setWithdrawAmount] = useState({ amount: 0, slider: 0 });
+  const { fetchWithdrawStake, fetchWithdrawStakePending } = useFetchWithdraw();
+  const [withdrawStakeAmount, setWithdrawStakeAmount] = useState({ amount: 0, slider: 0 });
 
   const onSliderChange = (_, sliderNum) => {
     const total = sharesBalance
       .multipliedBy(new BigNumber(pool.pricePerFullShare))
       .dividedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals));
 
-    setWithdrawAmount({
+    setWithdrawStakeAmount({
       amount: sliderNum === 0 ? 0 : calculateReallyNum(total, sliderNum),
       slider: sliderNum,
     });
@@ -54,7 +55,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
       sliderNum = Math.round(byDecimals(inputVal / total, 0).toNumber() * 100);
     }
 
-    setWithdrawAmount({
+    setWithdrawStakeAmount({
       amount: inputFinalVal(value, total, pool.tokenDecimals),
       slider: sliderNum,
     });
@@ -62,22 +63,21 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
 
   const onWithdraw = isAll => {
     if (isAll) {
-      setWithdrawAmount({
-        amount: sharesBalance.multipliedBy(pool.pricePerFullShare).dividedBy('1e18').toFormat(4),
+      setWithdrawStakeAmount({
+        amount: pool.userInfo[0],
         slider: 100,
       });
     }
 
-    if (withdrawAmount.slider >= 99) {
+    if (withdrawStakeAmount.slider >= 99) {
       isAll = true;
     }
 
-    const amountValue = withdrawAmount.amount
-      ? withdrawAmount.amount.replace(',', '')
-      : withdrawAmount.amount;
+    const amountValue = withdrawStakeAmount.amount
+      ? withdrawStakeAmount.amount.replace(',', '')
+      : withdrawStakeAmount.amount;
 
-    if (pool.tokenAddress) {
-      fetchWithdraw({
+      fetchWithdrawStake({
         address,
         web3,
         isAll,
@@ -90,21 +90,9 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
       })
         .then(() => enqueueSnackbar(t('Vault-WithdrawSuccess'), { variant: 'success' }))
         .catch(error => enqueueSnackbar(t('Vault-WithdrawError', { error }), { variant: 'error' }));
-    } else {
-      fetchWithdrawBnb({
-        address,
-        web3,
-        isAll,
-        amount: new BigNumber(amountValue)
-          .multipliedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals))
-          .toString(10),
-        contractAddress: pool.earnContractAddress,
-        index,
-      })
-        .then(() => enqueueSnackbar(t('Vault-WithdrawSuccess'), { variant: 'success' }))
-        .catch(error => enqueueSnackbar(t('Vault-WithdrawError', { error }), { variant: 'error' }));
+
     }
-  };
+
 
   return (
     <Grid item xs={12} md={shouldHideFromHarvest(pool.name) ? 6 : 5} className={classes.sliderDetailContainer}>
@@ -120,21 +108,14 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
 
 
       <FormControl fullWidth variant="outlined">
-        <CustomOutlinedInput value={withdrawAmount.amount} onChange={onInputChange} />
+        <CustomOutlinedInput value={withdrawStakeAmount.amount} onChange={onInputChange} />
       </FormControl>
       <CustomSlider
         aria-labelledby="continuous-slider"
-        value={withdrawAmount.slider}
+        value={withdrawStakeAmount.slider}
         onChange={onSliderChange}
       />
       <div className={classes.showDetailButtonCon}>
-        {pool.status === 'refund' ? (
-          <RefundButtons
-            tokenAddress={pool.earnedTokenAddress}
-            refundAddress={pool.refundContractAddress}
-            index={index}
-          />
-        ) : (
           <>
             <Button
               className={`${classes.showDetailButton} ${classes.showDetailButtonOutlined}`}
@@ -142,7 +123,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
               color="primary"
               onClick={() => onWithdraw(false)}
             >
-              {fetchWithdrawPending[index]
+              {fetchWithdrawStakePending[index]
                 ? `${t('Vault-Withdrawing')}`
                 : `${t('Vault-WithdrawButton')}`}
             </Button>
@@ -152,15 +133,15 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
               color="primary"
               onClick={() => onWithdraw(true)}
             >
-              {fetchWithdrawPending[index]
+              {fetchWithdrawStakePending[index]
                 ? `${t('Vault-Withdrawing')}`
                 : `${t('Vault-WithdrawButtonAll')}`}
             </Button>
           </>
-        )}
+
       </div>
     </Grid>
-  );
+  )
 };
 
 export default WithdrawSection;
