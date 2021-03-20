@@ -15,6 +15,7 @@ import { inputLimitPass, inputFinalVal, shouldHideFromHarvest } from 'features/h
 import { byDecimals, calculateReallyNum, format } from 'features/helpers/bignumber';
 import Button from 'components/CustomButtons/Button.js';
 import styles from './styles';
+import { stake } from '../../../../web3';
 
 const useStyles = makeStyles(styles);
 
@@ -53,7 +54,6 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
 
     if (isAll) {
 
-      console.log("hello")
       setStakeBalance({
         //amount: format(sharesBalance),
         // temp harrdcoded value
@@ -61,20 +61,21 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
         slider: 100,
       });
     }
-
+    console.log(sharesBalance)
+    console.log('stakebalance', stakeBalance.amount)
     if (pool.depositsPaused) {
       console.error('Deposits paused!');
       return;
     }
+
     //
     let amountValue = stakeBalance.amount
       ? stakeBalance.amount.replace(',', '')
       : stakeBalance.amount;
 
     if(isAll){
-      amountValue = sharesBalance
+      amountValue = byDecimals(sharesBalance.toNumber(),pool.tokenDecimals)
     }
-    console.log('format : ', amountValue)
 
     fetchStake({
         web3,
@@ -102,6 +103,7 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
   };
 
   const changeDetailInputValue = event => {
+    console.log('changeDetailInputValue')
     let value = event.target.value;
     const total = byDecimals(sharesBalance.toNumber(),pool.tokenDecimals);
 
