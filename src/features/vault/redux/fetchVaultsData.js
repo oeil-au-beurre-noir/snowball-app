@@ -56,7 +56,7 @@ export function fetchVaultsData({ address, web3, pools }) {
         const vault = new web3.eth.Contract(vaultABI, pool.earnedTokenAddress);
         return {
           pricePerFullShare: vault.methods.getPricePerFullShare(),
-          tvl: vault.methods.balance(),
+          tvl: pool.id === "snob-snob-avax" ? vault.methods.balanceOf(iceQueenAddress) : vault.methods.balance(),
         };
       });
 
