@@ -9,13 +9,15 @@ import DepositSection from '../PoolDetails/DepositSection/DepositSection';
 import WithdrawSection from '../PoolDetails/WithdrawSection/WithdrawSection';
 import { shouldHideFromHarvest } from '../../../helpers/utils';
 import HarvestSection from '../PoolDetails/HarvestSection/HarvestSection';
-import StakeSnob from '../StakeSnob/StakeSnob';
+import Accordion from '@material-ui/core/Accordion';
 
 const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
   let spglDeposited = 0;
   if(pool.userInfo){
     spglDeposited = pool.userInfo[0]
   };
+
+
 
   return (
 
@@ -35,13 +37,14 @@ const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
 
         { pool.poolId === 2 &&
 
-        <StakeSnob
-          fromPage={fromPage}
+
+        <PoolDetails
           pool={pool}
           balanceSingle={balanceSingle}
           sharesBalance={sharesBalance}
           index={index}
-          />
+        />
+
         }
 
       </Grid>
