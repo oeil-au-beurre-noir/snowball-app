@@ -13,6 +13,7 @@ import PoolPaused from './PoolPaused/PoolPaused';
 import PoolTitle from './PoolTitle/PoolTitle';
 import LabeledStat from './LabeledStat/LabeledStat';
 import SummaryActions from './SummaryActions/SummaryActions';
+import {lpDisplay, spglDisplay} from '../../../helpers/poolDisplay';
 
 const useStyles = makeStyles(styles);
 
@@ -80,29 +81,30 @@ const PoolSummary = ({
           <Grid item container justify="space-between">
             <Hidden smDown>
 
-              {fromPage == 'snowglobes' &&
+              {lpDisplay(fromPage,pool) &&
               <LabeledStat
                 value={formatDecimals(balanceSingle)}
-                label={t('Vault-Balance')}
+                label={'LP Available'}
                 isLoading={!fetchBalancesDone}
                 xs={5}
                 md={3}
               />
               }
-
-              <LabeledStat
-                value={Number(formatDecimals(
-                  byDecimals(
-                    sharesBalance.multipliedBy(new BigNumber(pool.pricePerFullShare)),
-                    pool.tokenDecimals
-                  )
-                )).toFixed(2)}
-                label={fromPage === 'snowglobes' ? 'Deposited' : 'Balance'}
-                isLoading={!fetchBalancesDone}
-                xs={5}
-                md={3}
-                align="start"
-              />
+              {spglDisplay(fromPage,pool) &&
+                <LabeledStat
+                  value={Number(formatDecimals(
+                    byDecimals(
+                      sharesBalance.multipliedBy(new BigNumber(pool.pricePerFullShare)),
+                      pool.tokenDecimals
+                    )
+                  )).toFixed(2)}
+                  label={'sPGL Balance'}
+                  isLoading={!fetchBalancesDone}
+                  xs={5}
+                  md={3}
+                  align="start"
+                />
+              }
 
 
               { fromPage === 'icequeen' && pool.userInfo &&
