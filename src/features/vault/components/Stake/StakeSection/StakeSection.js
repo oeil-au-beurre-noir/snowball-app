@@ -49,7 +49,6 @@ const StakeSection = ({ pool, index, balanceSingle,sharesBalance }) => {
 
   };
 
-
   const onStake = isAll => {
 
     if (isAll) {

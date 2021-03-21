@@ -5,7 +5,7 @@ export const pools = [
     name: 'SNOB-AVAX LP',
     token: 'SNOB-AVAX LP',
     tokenDescription: 'Uses: Pangolin',
-    tokenAddress: '0xc38f41a296a4493ff429f1238e030924a1542e50',
+    tokenAddress: '0xa1c2c3b6b120cbd4cec7d2371ffd4a931a134a32',
     tokenDecimals: 18,
     tokenDescriptionUrl: '#',
     earnedToken: 'sPGLSNOB-AVAX',
@@ -23,7 +23,8 @@ export const pools = [
     callFee: 0.5,
     lockForSnob: true,
     lockRate: 0.5,
-    poolId: 2
+    poolId: 2,
+    isSnowglobe: false
   },
     {
     id: 'png-png-avax',
@@ -35,8 +36,8 @@ export const pools = [
     tokenDecimals: 18,
     tokenDescriptionUrl: '#',
     earnedToken: 'sPGLPNG-AVAX',
-    earnedTokenAddress: '0x6A803904b9eA0Fc982fBB077c7243c244Ae05a2d',
-    earnContractAddress: '0x6A803904b9eA0Fc982fBB077c7243c244Ae05a2d',
+    earnedTokenAddress: '0x621207093D2e65Bf3aC55dD8Bf0351B980A63815',
+    earnContractAddress: '0x621207093D2e65Bf3aC55dD8Bf0351B980A63815',
     pricePerFullShare: 1,
     tvl: 0,
     oracle: 'lps',
@@ -49,7 +50,8 @@ export const pools = [
     callFee: 0.5,
       lockForSnob: true,
       lockRate: 0.25,
-      poolId: 3
+      poolId: 3,
+      isSnowglobe: true
 
   },
   {
@@ -76,7 +78,8 @@ export const pools = [
     callFee: 0.5,
     lockForSnob: true,
     lockRate: 0.125,
-    poolId: 4
+    poolId: 4,
+    isSnowglobe: true
   },
 
   {
@@ -103,7 +106,8 @@ export const pools = [
     callFee: 0.5,
     lockForSnob: true,
     lockRate: 0.125,
-    poolId: 1
+    poolId: 1,
+    isSnowglobe: true
 
   },
   {
@@ -130,7 +134,8 @@ export const pools = [
     callFee: 0.5,
     lockForSnob: false,
     lockRate: 0,
-    poolId: 5
+    poolId: 5,
+    isSnowglobe: true
   }
   /* keep a few in comment for the example
   {
