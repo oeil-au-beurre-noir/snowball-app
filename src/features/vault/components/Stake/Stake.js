@@ -3,7 +3,7 @@ import AccordionDetails from '@material-ui/core/AccordionActions';
 import Grid from '@material-ui/core/Grid';
 import StakeSection from './StakeSection/StakeSection';
 import WithdrawStakeSection from './WithdrawStakeSection/WithdrawStakeSection';
-
+import {stakeActionDisplay} from '../../../helpers/poolDisplay';
 
 const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
   let spglDeposited = 0;
@@ -15,7 +15,7 @@ const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
 
     <AccordionDetails style={{ justifyContent: 'space-between' }}>
       <Grid container>
-        {(sharesBalance > 0 || spglDeposited > 0 ) &&
+        {stakeActionDisplay(fromPage, pool, sharesBalance,spglDeposited ) &&
 
           <>
           <StakeSection index={index} pool={pool} balanceSingle={balanceSingle} sharesBalance={sharesBalance}/>
