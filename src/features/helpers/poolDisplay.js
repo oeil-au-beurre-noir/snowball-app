@@ -53,8 +53,6 @@ export function stakeActionDisplay(fromPage, pool, sharesBalance,spglDeposited) 
     if(pool.poolId === snobPoolId){
       result =  false;
     }
-
-
     return result
   }
 
