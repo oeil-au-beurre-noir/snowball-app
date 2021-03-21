@@ -5,9 +5,9 @@ import {
   VAULT_FETCH_STAKE_SUCCESS,
   VAULT_FETCH_STAKE_FAILURE,
 } from './constants';
-import { stake  } from '../../web3';
+import { stake } from '../../web3';
 
-export function fetchStaking({ web3, address, poolId, amount,index }) {
+export function fetchStake({ web3, address, isAll, amount, poolId, index }) {
   return dispatch => {
     dispatch({
       type: VAULT_FETCH_STAKE_BEGIN,
@@ -15,7 +15,7 @@ export function fetchStaking({ web3, address, poolId, amount,index }) {
     });
 
     const promise = new Promise((resolve, reject) => {
-      stake({ web3, address,poolId, amount, dispatch })
+      stake({ web3, address, isAll, amount, poolId, dispatch })
         .then(data => {
           dispatch({
             type: VAULT_FETCH_STAKE_SUCCESS,
@@ -36,33 +36,24 @@ export function fetchStaking({ web3, address, poolId, amount,index }) {
   };
 }
 
-export function useFetchStaking() {
+export function useFetchStake() {
   const dispatch = useDispatch();
 
-  const { fetchStakingPending } = useSelector(state => ({
-    fetchStakingPending: state.vault.fetchStakingPending,
+  const { fetchStakePending } = useSelector(state => ({
+    fetchStakePending: state.vault.fetchStakePending,
   }));
 
   const boundAction = useCallback(
     data => {
-      return dispatch(fetchStaking(data));
+      return dispatch(fetchStake(data));
     },
     [dispatch]
   );
-
-  /*
-  const boundAction2 = useCallback(
-    data => {
-      return dispatch(fetchDepositBnb(data));
-    },
-    [dispatch]
-  );
-  */
 
 
   return {
-    fetchStaking: boundAction,
-    fetchStakingPending,
+    fetchStake: boundAction,
+    fetchStakePending,
   };
 }
 
@@ -71,8 +62,8 @@ export function reducer(state, action) {
     case VAULT_FETCH_STAKE_BEGIN:
       return {
         ...state,
-        fetchStakingPending: {
-          ...state.fetchStakingPending,
+        fetchStakePending: {
+          ...state.fetchStakePending,
           [action.index]: true,
         },
       };
@@ -80,8 +71,8 @@ export function reducer(state, action) {
     case VAULT_FETCH_STAKE_SUCCESS:
       return {
         ...state,
-        fetchStakingPending: {
-          ...state.fetchStakingPending,
+        fetchStakePending: {
+          ...state.fetchStakePending,
           [action.index]: false,
         },
       };
@@ -89,8 +80,8 @@ export function reducer(state, action) {
     case VAULT_FETCH_STAKE_FAILURE:
       return {
         ...state,
-        fetchStakingPending: {
-          ...state.fetchStakingPending,
+        fetchStakePending: {
+          ...state.fetchStakePending,
           [action.index]: false,
         },
       };

@@ -13,10 +13,12 @@ import PoolPaused from './PoolPaused/PoolPaused';
 import PoolTitle from './PoolTitle/PoolTitle';
 import LabeledStat from './LabeledStat/LabeledStat';
 import SummaryActions from './SummaryActions/SummaryActions';
+import {lpDisplay, spglDisplay} from '../../../helpers/poolDisplay';
 
 const useStyles = makeStyles(styles);
 
 const PoolSummary = ({
+  fromPage,
   pool,
   launchpool,
   toggleCard,
@@ -78,26 +80,55 @@ const PoolSummary = ({
         <Grid item md={7} xs={4}>
           <Grid item container justify="space-between">
             <Hidden smDown>
+
+              {lpDisplay(fromPage,pool) &&
               <LabeledStat
                 value={formatDecimals(balanceSingle)}
-                label={t('Vault-Balance')}
+                label={'LP Available'}
                 isLoading={!fetchBalancesDone}
                 xs={5}
                 md={3}
               />
+              }
+              {spglDisplay(fromPage,pool) &&
+                <LabeledStat
+                  value={Number(formatDecimals(
+                    byDecimals(
+                      sharesBalance.multipliedBy(new BigNumber(pool.pricePerFullShare)),
+                      pool.tokenDecimals
+                    )
+                  )).toFixed(2)}
+                  label={'sPGL Balance'}
+                  isLoading={!fetchBalancesDone}
+                  xs={5}
+                  md={3}
+                  align="start"
+                />
+              }
+
+
+              { fromPage === 'icequeen' && pool.userInfo &&
               <LabeledStat
-                value={formatDecimals(
-                  byDecimals(
-                    sharesBalance.multipliedBy(new BigNumber(pool.pricePerFullShare)),
-                    pool.tokenDecimals
-                  )
-                )}
-                label={t('Vault-Deposited')}
+                value={Number(pool.userInfo[0] /1e18).toFixed(2)}
+                label={'Deposited'}
                 isLoading={!fetchBalancesDone}
                 xs={5}
                 md={3}
                 align="start"
               />
+              }
+
+
+              { fromPage == 'icequeen' &&
+              <LabeledStat
+                value={Number(pool.pendingSnowballs).toFixed(2)}
+                label={'Pending $SNOB'}
+                isLoading={!fetchBalancesDone}
+                xs={5}
+                md={3}
+                align="start"
+              />
+              }
               <LabeledStat
                 value={formatApy(apy)}
                 label={t('Vault-APY')}

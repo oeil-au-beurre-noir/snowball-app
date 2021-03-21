@@ -11,7 +11,7 @@ import usePoolsByVaultType from '../../hooks/usePoolsByVaultType';
 import usePoolsByAsset from '../../hooks/usePoolsByAsset';
 import useSortedPools from '../../hooks/useSortedPools';
 import useVisiblePools from '../../hooks/useVisiblePools';
-
+import { poolDisplay } from  'features/helpers/poolDisplay';
 import Pool from '../Pool/Pool';
 import Filters from '../Filters/Filters';
 
@@ -65,7 +65,7 @@ const VisiblePools = ({
         <InfiniteScroll dataLength={visiblePools.length} hasMore={true} next={fetchVisiblePools}>
           {visiblePools.map((pool, index) => (
             // if we're on icequeen page we only display stakable 'lockForSnob' pools
-            (fromPage != 'icequeen'|| pool.lockForSnob == true ) ?
+            ( poolDisplay(fromPage , pool) ) ?
             <Pool
               pool={pool}
               poolsInfo={poolsInfo}

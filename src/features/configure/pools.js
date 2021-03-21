@@ -23,7 +23,8 @@ export const pools = [
     callFee: 0.5,
     lockForSnob: true,
     lockRate: 0.5,
-    poolId: 2
+    poolId: 2,
+    isSnowglobe: false
   },
     {
     id: 'png-png-avax',
@@ -49,7 +50,8 @@ export const pools = [
     callFee: 0.5,
       lockForSnob: true,
       lockRate: 0.25,
-      poolId: 3
+      poolId: 3,
+      isSnowglobe: true
 
   },
   {
@@ -76,7 +78,8 @@ export const pools = [
     callFee: 0.5,
     lockForSnob: true,
     lockRate: 0.125,
-    poolId: 4
+    poolId: 4,
+    isSnowglobe: true
   },
 
   {
@@ -103,7 +106,8 @@ export const pools = [
     callFee: 0.5,
     lockForSnob: true,
     lockRate: 0.125,
-    poolId: 1
+    poolId: 1,
+    isSnowglobe: true
 
   },
   {
@@ -130,7 +134,8 @@ export const pools = [
     callFee: 0.5,
     lockForSnob: false,
     lockRate: 0,
-    poolId: 5
+    poolId: 5,
+    isSnowglobe: true
   }
   /* keep a few in comment for the example
   {
