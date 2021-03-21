@@ -5,7 +5,7 @@ export const pools = [
     name: 'SNOB-AVAX LP',
     token: 'SNOB-AVAX LP',
     tokenDescription: 'Uses: Pangolin',
-    tokenAddress: '0xc38f41a296a4493ff429f1238e030924a1542e50',
+    tokenAddress: '0xa1c2c3b6b120cbd4cec7d2371ffd4a931a134a32',
     tokenDecimals: 18,
     tokenDescriptionUrl: '#',
     earnedToken: 'sPGLSNOB-AVAX',
