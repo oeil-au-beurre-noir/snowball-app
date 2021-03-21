@@ -50,9 +50,9 @@ export function stakeActionDisplay(fromPage, pool, sharesBalance,spglDeposited) 
       if(sharesBalance > 0 || spglDeposited > 0 ) {
         result = true;
       }
-    if(pool.poolId === snobPoolId){
-      result =  false;
-    }
+      if(pool.poolId === snobPoolId){
+        result =  false;
+      }
     return result
   }
 

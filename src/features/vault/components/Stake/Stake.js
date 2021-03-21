@@ -4,6 +4,12 @@ import Grid from '@material-ui/core/Grid';
 import StakeSection from './StakeSection/StakeSection';
 import WithdrawStakeSection from './WithdrawStakeSection/WithdrawStakeSection';
 import {stakeActionDisplay} from '../../../helpers/poolDisplay';
+import PoolDetails from '../PoolDetails/PoolDetails';
+import DepositSection from '../PoolDetails/DepositSection/DepositSection';
+import WithdrawSection from '../PoolDetails/WithdrawSection/WithdrawSection';
+import { shouldHideFromHarvest } from '../../../helpers/utils';
+import HarvestSection from '../PoolDetails/HarvestSection/HarvestSection';
+import StakeSnob from '../StakeSnob/StakeSnob';
 
 const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
   let spglDeposited = 0;
@@ -23,8 +29,19 @@ const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
           </>
 
         }
-        {sharesBalance == 0 &&
+        {sharesBalance == 0  && pool.poolId !=2 &&
         <div>YOU NEED TO DEPOSIT IN {pool.name}  before you can stake for SNOB</div>
+        }
+
+        { pool.poolId === 2 &&
+
+        <StakeSnob
+          fromPage={fromPage}
+          pool={pool}
+          balanceSingle={balanceSingle}
+          sharesBalance={sharesBalance}
+          index={index}
+          />
         }
 
       </Grid>
