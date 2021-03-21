@@ -6,12 +6,16 @@ import WithdrawStakeSection from './WithdrawStakeSection/WithdrawStakeSection';
 
 
 const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
+  let spglDeposited = 0;
+  if(pool.userInfo){
+    spglDeposited = pool.userInfo[0]
+  };
 
   return (
 
     <AccordionDetails style={{ justifyContent: 'space-between' }}>
       <Grid container>
-        {sharesBalance > 0 &&
+        {(sharesBalance > 0 || spglDeposited > 0 ) &&
 
           <>
           <StakeSection index={index} pool={pool} balanceSingle={balanceSingle} sharesBalance={sharesBalance}/>
