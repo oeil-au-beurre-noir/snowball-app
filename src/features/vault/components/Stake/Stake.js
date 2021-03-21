@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AccordionDetails from '@material-ui/core/AccordionActions';
 import Grid from '@material-ui/core/Grid';
 import StakeSection from './StakeSection/StakeSection';
-//import WithdrawStakeSection from './WithdrawStakeSection/WithdrawStakeSection';
+import WithdrawStakeSection from './WithdrawStakeSection/WithdrawStakeSection';
 
 
 const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
@@ -15,7 +15,7 @@ const Stake = ({ fromPage, pool, balanceSingle, sharesBalance,index}) => {
 
           <>
           <StakeSection index={index} pool={pool} balanceSingle={balanceSingle} sharesBalance={sharesBalance}/>
-          {/*<WithdrawStakeSection index={index} pool={pool} balanceSingle={balanceSingle} sharesBalance={sharesBalance}/>*/}
+          <WithdrawStakeSection index={index} pool={pool} balanceSingle={balanceSingle} sharesBalance={sharesBalance}/>
           </>
 
         }

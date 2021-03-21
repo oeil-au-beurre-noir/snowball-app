@@ -5,6 +5,7 @@ import { reducer as fetchApprovalReducer } from './fetchApproval';
 import { reducer as fetchDepositReducer } from './fetchDeposit';
 import { reducer as fetchStakeReducer } from './fetchDeposit';
 import { reducer as fetchWithdrawReducer } from './fetchWithdraw';
+import { reducer as fetchWithdrawStakeReducer } from './fetchWithdrawStake';
 import { reducer as fetchApysReducer } from './fetchApys';
 import { reducer as fetchStakeApprovalReducer } from './fetchStakeApproval';
 
@@ -17,6 +18,7 @@ const reducers = [
   fetchDepositReducer,
   fetchStakeReducer,
   fetchWithdrawReducer,
+  fetchWithdrawStakeReducer,
   fetchApysReducer,
 ];
 
